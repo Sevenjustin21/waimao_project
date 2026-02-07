@@ -1,0 +1,1203 @@
+{
+  "version": 1,
+  "directus": "10.10.0",
+  "collections": [
+    {
+      "collection": "categories",
+      "schema": {
+        "name": "categories",
+        "schema": "public"
+      },
+      "meta": {
+        "collection": "categories",
+        "icon": "database",
+        "note": null,
+        "display_template": null,
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": null,
+        "sort": null,
+        "group": null,
+        "collapse": "open",
+        "preview_url": null,
+        "versioning": false
+      }
+    },
+    {
+      "collection": "products",
+      "schema": {
+        "name": "products",
+        "schema": "public"
+      },
+      "meta": {
+        "collection": "products",
+        "icon": "database",
+        "note": null,
+        "display_template": null,
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": null,
+        "sort": null,
+        "group": null,
+        "collapse": "open",
+        "preview_url": null,
+        "versioning": false
+      }
+    },
+    {
+      "collection": "attributes",
+      "schema": {
+        "name": "attributes",
+        "schema": "public"
+      },
+      "meta": {
+        "collection": "attributes",
+        "icon": "database",
+        "note": null,
+        "display_template": null,
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": null,
+        "sort": null,
+        "group": null,
+        "collapse": "open",
+        "preview_url": null,
+        "versioning": false
+      }
+    },
+    {
+      "collection": "product_attribute_values",
+      "schema": {
+        "name": "product_attribute_values",
+        "schema": "public"
+      },
+      "meta": {
+        "collection": "product_attribute_values",
+        "icon": "database",
+        "note": null,
+        "display_template": null,
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": null,
+        "sort": null,
+        "group": null,
+        "collapse": "open",
+        "preview_url": null,
+        "versioning": false
+      }
+    },
+    {
+      "collection": "inquiries",
+      "schema": {
+        "name": "inquiries",
+        "schema": "public"
+      },
+      "meta": {
+        "collection": "inquiries",
+        "icon": "database",
+        "note": null,
+        "display_template": null,
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": null,
+        "sort": null,
+        "group": null,
+        "collapse": "open",
+        "preview_url": null,
+        "versioning": false
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "schema": {
+        "name": "inquiry_items",
+        "schema": "public"
+      },
+      "meta": {
+        "collection": "inquiry_items",
+        "icon": "database",
+        "note": null,
+        "display_template": null,
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": null,
+        "sort": null,
+        "group": null,
+        "collapse": "open",
+        "preview_url": null,
+        "versioning": false
+      }
+    }
+  ],
+  "fields": [
+    {
+      "collection": "categories",
+      "field": "id",
+      "type": "uuid",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "data_type": "uuid",
+        "name": "id",
+        "table": "categories"
+      },
+      "meta": {
+        "special": [
+          "uuid"
+        ]
+      }
+    },
+    {
+      "collection": "categories",
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "default_value": "published",
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "status",
+        "table": "categories"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "categories",
+      "field": "date_created",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-created"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_created",
+        "table": "categories"
+      }
+    },
+    {
+      "collection": "categories",
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-updated"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_updated",
+        "table": "categories"
+      }
+    },
+    {
+      "collection": "categories",
+      "field": "name",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "name",
+        "table": "categories"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "categories",
+      "field": "slug",
+      "type": "string",
+      "schema": {
+        "is_unique": true,
+        "is_nullable": true,
+        "is_generated": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "slug",
+        "table": "categories"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "categories",
+      "field": "description",
+      "type": "text",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "text",
+        "name": "description",
+        "table": "categories"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "categories",
+      "field": "parent_id",
+      "type": "uuid",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "uuid",
+        "name": "parent_id",
+        "table": "categories"
+      },
+      "meta": {
+        "special": [
+          "m2o"
+        ]
+      }
+    },
+    {
+      "collection": "products",
+      "field": "id",
+      "type": "uuid",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "data_type": "uuid",
+        "name": "id",
+        "table": "products"
+      },
+      "meta": {
+        "special": [
+          "uuid"
+        ]
+      }
+    },
+    {
+      "collection": "products",
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "default_value": "published",
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "status",
+        "table": "products"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "products",
+      "field": "date_created",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-created"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_created",
+        "table": "products"
+      }
+    },
+    {
+      "collection": "products",
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-updated"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_updated",
+        "table": "products"
+      }
+    },
+    {
+      "collection": "products",
+      "field": "sku",
+      "type": "string",
+      "schema": {
+        "is_unique": true,
+        "is_nullable": true,
+        "is_generated": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "sku",
+        "table": "products"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "products",
+      "field": "name",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "name",
+        "table": "products"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "products",
+      "field": "slug",
+      "type": "string",
+      "schema": {
+        "is_unique": true,
+        "is_nullable": true,
+        "is_generated": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "slug",
+        "table": "products"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "products",
+      "field": "description",
+      "type": "text",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "text",
+        "name": "description",
+        "table": "products"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "products",
+      "field": "category_id",
+      "type": "uuid",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "uuid",
+        "name": "category_id",
+        "table": "products"
+      },
+      "meta": {
+        "special": [
+          "m2o"
+        ]
+      }
+    },
+    {
+      "collection": "attributes",
+      "field": "id",
+      "type": "uuid",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "data_type": "uuid",
+        "name": "id",
+        "table": "attributes"
+      },
+      "meta": {
+        "special": [
+          "uuid"
+        ]
+      }
+    },
+    {
+      "collection": "attributes",
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "default_value": "published",
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "status",
+        "table": "attributes"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "attributes",
+      "field": "date_created",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-created"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_created",
+        "table": "attributes"
+      }
+    },
+    {
+      "collection": "attributes",
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-updated"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_updated",
+        "table": "attributes"
+      }
+    },
+    {
+      "collection": "attributes",
+      "field": "name",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "name",
+        "table": "attributes"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "attributes",
+      "field": "key",
+      "type": "string",
+      "schema": {
+        "is_unique": true,
+        "is_nullable": true,
+        "is_generated": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "key",
+        "table": "attributes"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "attributes",
+      "field": "type",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "type",
+        "table": "attributes"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "attributes",
+      "field": "unit",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "unit",
+        "table": "attributes"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "attributes",
+      "field": "is_facet",
+      "type": "boolean",
+      "schema": {
+        "default_value": false,
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "boolean",
+        "name": "is_facet",
+        "table": "attributes"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "product_attribute_values",
+      "field": "id",
+      "type": "uuid",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "data_type": "uuid",
+        "name": "id",
+        "table": "product_attribute_values"
+      },
+      "meta": {
+        "special": [
+          "uuid"
+        ]
+      }
+    },
+    {
+      "collection": "product_attribute_values",
+      "field": "date_created",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-created"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_created",
+        "table": "product_attribute_values"
+      }
+    },
+    {
+      "collection": "product_attribute_values",
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-updated"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_updated",
+        "table": "product_attribute_values"
+      }
+    },
+    {
+      "collection": "product_attribute_values",
+      "field": "product_id",
+      "type": "uuid",
+      "meta": {
+        "special": [
+          "m2o"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "uuid",
+        "name": "product_id",
+        "table": "product_attribute_values"
+      }
+    },
+    {
+      "collection": "product_attribute_values",
+      "field": "attribute_id",
+      "type": "uuid",
+      "meta": {
+        "special": [
+          "m2o"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "uuid",
+        "name": "attribute_id",
+        "table": "product_attribute_values"
+      }
+    },
+    {
+      "collection": "product_attribute_values",
+      "field": "value_text",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "value_text",
+        "table": "product_attribute_values"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "product_attribute_values",
+      "field": "value_number",
+      "type": "float",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "real",
+        "numeric_precision": 24,
+        "name": "value_number",
+        "table": "product_attribute_values"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "inquiries",
+      "field": "id",
+      "type": "uuid",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "data_type": "uuid",
+        "name": "id",
+        "table": "inquiries"
+      },
+      "meta": {
+        "special": [
+          "uuid"
+        ]
+      }
+    },
+    {
+      "collection": "inquiries",
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "default_value": "new",
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "status",
+        "table": "inquiries"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "inquiries",
+      "field": "app_user_id",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "app_user_id",
+        "table": "inquiries"
+      },
+      "meta": {
+        "note": "Linked Prisma App User ID"
+      }
+    },
+    {
+      "collection": "inquiries",
+      "field": "date_created",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-created"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_created",
+        "table": "inquiries"
+      }
+    },
+    {
+      "collection": "inquiries",
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-updated"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_updated",
+        "table": "inquiries"
+      }
+    },
+    {
+      "collection": "inquiries",
+      "field": "customer_name",
+      "type": "string",
+      "meta": {
+        "required": true
+      },
+      "schema": {
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "customer_name",
+        "table": "inquiries"
+      }
+    },
+    {
+      "collection": "inquiries",
+      "field": "email",
+      "type": "string",
+      "meta": {
+        "required": true
+      },
+      "schema": {
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "email",
+        "table": "inquiries"
+      }
+    },
+    {
+      "collection": "inquiries",
+      "field": "company",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "company",
+        "table": "inquiries"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "inquiries",
+      "field": "country",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "country",
+        "table": "inquiries"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "inquiries",
+      "field": "message",
+      "type": "text",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "text",
+        "name": "message",
+        "table": "inquiries"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "inquiries",
+      "field": "ip_address",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "ip_address",
+        "table": "inquiries"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "id",
+      "type": "uuid",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "data_type": "uuid",
+        "name": "id",
+        "table": "inquiry_items"
+      },
+      "meta": {
+        "special": [
+          "uuid"
+        ]
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "date_created",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-created"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_created",
+        "table": "inquiry_items"
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-updated"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_updated",
+        "table": "inquiry_items"
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "inquiry_id",
+      "type": "uuid",
+      "meta": {
+        "special": [
+          "m2o"
+        ],
+        "required": true
+      },
+      "schema": {
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "uuid",
+        "name": "inquiry_id",
+        "table": "inquiry_items"
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "product_id",
+      "type": "uuid",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "uuid",
+        "name": "product_id",
+        "table": "inquiry_items"
+      },
+      "meta": {
+        "special": [
+          "m2o"
+        ]
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "quantity",
+      "type": "integer",
+      "schema": {
+        "default_value": 1,
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "integer",
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "name": "quantity",
+        "table": "inquiry_items"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "target_price",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "target_price",
+        "table": "inquiry_items"
+      },
+      "meta": {}
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "remark",
+      "type": "text",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "text",
+        "name": "remark",
+        "table": "inquiry_items"
+      },
+      "meta": {}
+    }
+  ],
+  "relations": [
+    {
+      "collection": "products",
+      "field": "category_id",
+      "related_collection": "categories",
+      "related_field": "id",
+      "schema": {
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "categories",
+      "field": "parent_id",
+      "related_collection": "categories",
+      "related_field": "id",
+      "schema": {
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "product_attribute_values",
+      "field": "product_id",
+      "related_collection": "products",
+      "related_field": "id",
+      "schema": {
+        "on_delete": "CASCADE"
+      }
+    },
+    {
+      "collection": "product_attribute_values",
+      "field": "attribute_id",
+      "related_collection": "attributes",
+      "related_field": "id",
+      "schema": {
+        "on_delete": "CASCADE"
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "inquiry_id",
+      "related_collection": "inquiries",
+      "related_field": "id",
+      "schema": {
+        "on_delete": "CASCADE"
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "product_id",
+      "related_collection": "products",
+      "related_field": "id",
+      "schema": {
+        "on_delete": "SET NULL"
+      }
+    }
+  ]
+}

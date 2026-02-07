@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+dist/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+token*.txt
+cookies.txt
+headers.txt
+
+# Local data volumes
+postgres_data/
+meili_data/
+directus_uploads/
+redis_data/
+volumes/
+
+# Misc
+.DS_Store
+Thumbs.db
