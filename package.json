@@ -10,11 +10,14 @@
     "lint": "next lint && npm run security:contract",
     "security:contract": "node scripts/security-contract-check.mjs",
     "typecheck": "tsc --noEmit",
-    "db:apply": "npx tsx scripts/apply-schema.ts",
-    "db:seed": "npx tsx scripts/seed-directus.ts",
+    "db:migrate": "npx prisma migrate deploy",
+    "schema:apply": "npx tsx scripts/apply-schema.ts",
+    "seed:demo": "npx tsx scripts/seed-directus.ts",
+    "reindex": "npx tsx scripts/reindex.ts",
+    "setup:dev": "npm run db:migrate && npm run schema:apply && npm run seed:demo && npm run reindex",
     "db:export": "npx tsx scripts/export-directus-schema.ts",
-    "search:reindex": "npx tsx scripts/reindex.ts",
-    "auth:admin": "npx tsx scripts/create-admin.ts"
+    "auth:admin": "npx tsx scripts/create-admin.ts",
+    "search:reindex": "npm run reindex"
   },
   "dependencies": {
     "@directus/sdk": "^16.0.0",

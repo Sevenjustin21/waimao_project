@@ -186,6 +186,51 @@ const PRODUCTS_DATA = [
   }
 ];
 
+// ---------------------------------------------------------------------------
+// 数据安全校验：防止无意识引入真实邮箱/手机号/人名
+// ---------------------------------------------------------------------------
+const EMAIL_REGEX = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i;
+const PHONE_REGEX = /\+?\d[\d\s\-()]{6,}\d/;
+
+function ensureNoPii(value: unknown, path: string) {
+  if (typeof value !== 'string') return;
+
+  if (EMAIL_REGEX.test(value)) {
+    throw new Error(`Seed data contains email-like value at ${path}: ${value}`);
+  }
+  if (PHONE_REGEX.test(value)) {
+    throw new Error(`Seed data contains phone-like value at ${path}: ${value}`);
+  }
+}
+
+function walkSeedPayload(payload: unknown, path: string) {
+  if (payload === null || payload === undefined) {
+    return;
+  }
+
+  if (Array.isArray(payload)) {
+    payload.forEach((item, index) => walkSeedPayload(item, `${path}[${index}]`));
+    return;
+  }
+
+  if (typeof payload === 'object') {
+    Object.entries(payload as Record<string, unknown>).forEach(([key, val]) => {
+      walkSeedPayload(val, `${path}.${key}`);
+    });
+    return;
+  }
+
+  ensureNoPii(payload, path);
+}
+
+function validateSeedDataset() {
+  walkSeedPayload(CATEGORIES, 'CATEGORIES');
+  walkSeedPayload(ATTRIBUTES, 'ATTRIBUTES');
+  walkSeedPayload(PRODUCTS_DATA, 'PRODUCTS_DATA');
+}
+
+validateSeedDataset();
+
 // -----------------------------------------------------------------------------
 // 辅助函数
 // -----------------------------------------------------------------------------
