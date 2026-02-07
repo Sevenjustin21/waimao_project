@@ -1,0 +1,60 @@
+﻿# 本地开发运行手册
+
+## 前置要求
+- Node.js 18+
+- npm 9+
+- Docker / Docker Compose V2
+- Chromium/Edge/Firefox 任一浏览器
+
+## 初始化步骤
+1. 克隆仓库并进入目录：
+   ```bash
+   git clone https://github.com/Sevenjustin21/waimao_project.git
+   cd waimao_project
+   ```
+2. 复制环境变量模板并填写：
+   ```bash
+   cp infra/.env.example .env
+   # 按注释写入 Directus、Postgres、Redis、Meili、SMTP、NextAuth 等值
+   ```
+3. 安装依赖：
+   ```bash
+   npm install
+   ```
+4. 启动基础服务：
+   ```bash
+   docker compose -f infra/docker-compose.yml up -d
+   ```
+   - 默认会拉起 postgres、redis、meilisearch、directus 等容器
+   - 如需查看状态：`docker compose ps`
+5. 执行数据库迁移：
+   ```bash
+   npx prisma migrate deploy
+   ```
+6. 应用 Directus schema（需准备好的 snapshot 与脚本）：
+   ```bash
+   npm run schema:apply
+   ```
+7. 写入演示数据并同步搜索：
+   ```bash
+   npm run seed:demo
+   npm run reindex
+   ```
+   - `scripts/seed-directus.ts` 仅注入固定的工业紧固件分类/属性/产品，无真实客户数据
+   - 脚本会在运行前自检，若发现疑似邮箱/手机号会直接退出，确保不会误植 PII
+   - 多次执行会根据 SKU/slug 去重，因此可以随时重放以回到标准 demo 状态
+8. 启动 Next.js：
+   ```bash
+   npm run dev
+   # 或 npm run build && npm run start
+   ```
+
+## 验证
+- 浏览器访问 `http://localhost:3000`，确认首页、产品列表、RFQ 按钮渲染正常
+- 登录 `/admin`，检查产品/用户列表可加载
+- 通过 DevTools Network 面板确认 RFQ/CRUD API 能够发出请求
+- `docker compose logs -f directus` 观察 schema/seed/reindex 是否报错
+
+## 收尾
+- 关闭服务：`docker compose -f infra/docker-compose.yml down`
+- 若需要清理持久化卷，额外执行：`docker volume rm <name>`（谨慎操作）
