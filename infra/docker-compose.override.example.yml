@@ -1,0 +1,19 @@
+﻿version: "3.8"
+
+services:
+  app:
+    image: node:20-bullseye
+    container_name: waimao-next
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
+    volumes:
+      - ..:/app
+    env_file:
+      - ../.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      directus:
+        condition: service_healthy
