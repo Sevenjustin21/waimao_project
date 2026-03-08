@@ -14,10 +14,13 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="admin-theme flex min-h-screen flex-col bg-[#03050a] text-white">
       <AdminHeader />
-      <main className="flex-grow">
-        {children}
+      <main className="flex-grow bg-gradient-to-br from-[#050a15] via-[#05060d] to-[#010203]">
+        <div className="pointer-events-none fixed inset-0 z-0 opacity-20">
+          <div className="grid-overlay h-full w-full" />
+        </div>
+        <div className="relative z-10">{children}</div>
       </main>
     </div>
   );

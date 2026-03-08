@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { searchProducts } from '@/lib/meilisearch';
 import SearchBar from './components/search-bar';
 import FacetsSidebar from './components/facets-sidebar';
 import ProductCard from './components/product-card';
-import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 3600;
 
 interface ProductsPageProps {
   searchParams: {
@@ -19,7 +19,8 @@ interface ProductsPageProps {
 
 export const metadata: Metadata = {
   title: 'Industrial Products - Buy Online | WAIMO',
-  description: 'Browse our comprehensive catalog of industrial fasteners, components, and parts. Get instant quotes with fast export logistics.',
+  description:
+    'Browse our comprehensive catalog of industrial fasteners, components, and parts. Get instant quotes with fast export logistics.',
   keywords: ['industrial products', 'fasteners', 'components', 'parts', 'buy online', 'export'],
   openGraph: {
     title: 'Industrial Products - WAIMO',
@@ -33,150 +34,179 @@ export const metadata: Metadata = {
 };
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
-  const page = parseInt(searchParams.page || '1');
+  const page = Number.parseInt(searchParams.page || '1', 10);
   const pageSize = 20;
 
-  const result = await searchProducts({
-    q: searchParams.q,
+  let result: Awaited<ReturnType<typeof searchProducts>> = {
+    hits: [],
     page,
     pageSize,
-    category: searchParams.category,
-    filters: searchParams.filters,
-  });
+    total: 0,
+    totalPages: 0,
+    facets: {},
+  };
+  let searchError: string | null = null;
 
-  // Parse filters for display
+  try {
+    result = await searchProducts({
+      q: searchParams.q,
+      page,
+      pageSize,
+      category: searchParams.category,
+      filters: searchParams.filters,
+    });
+  } catch (error: any) {
+    console.error('searchProducts failed', error);
+    searchError = 'Unable to reach search index. Please retry or contact operations to inspect Meilisearch.';
+  }
+
   let activeFilters: Record<string, string[]> = {};
   try {
     if (searchParams.filters) {
       activeFilters = JSON.parse(searchParams.filters);
     }
-  } catch (e) {}
+  } catch {
+    activeFilters = {};
+  }
 
-  const hasActiveFilters = searchParams.q || searchParams.category || Object.keys(activeFilters).length > 0;
+  const hasActiveFilters =
+    Boolean(searchParams.q) || Boolean(searchParams.category) || Object.keys(activeFilters).length > 0;
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white py-14">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-widest text-blue-200">Industrial Fasteners</p>
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mt-3 mb-4">
-            Industrial Fasteners Catalog
+    <div className="relative min-h-screen bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.25),transparent_55%)]">
+      <div className="border-b border-white/5 bg-gradient-to-r from-[#020617] via-[#030712] to-[#050b17] py-14 text-white shadow-[0_25px_90px_rgba(0,0,0,0.65)]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <p className="text-xs uppercase tracking-[0.5em] text-blue-200">Engineering Terminal</p>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">
+            Fastener Intelligence Console
           </h1>
-          <p className="text-lg text-gray-300 max-w-3xl mb-8">
-            Browse our extensive inventory of high-quality DIN, ISO, and ANSI standard fasteners. 
-            Direct from manufacturer with full traceability.
+          <p className="mt-4 max-w-3xl text-base text-white/70 sm:text-lg">
+            Query our DIN / ISO / ANSI catalogue, visualize stock-ready assemblies, and push RFQ packets
+            to our supply response team with full traceability and compliance metadata.
           </p>
-          <div className="max-w-2xl">
-             <SearchBar />
+          <div className="mt-8 max-w-2xl">
+            <SearchBar />
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          <aside className="w-full lg:w-64 flex-shrink-0">
-            <div className="lg:sticky lg:top-24 space-y-6">
-              <div className="rounded-2xl border border-gray-200 bg-white shadow-sm p-5">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-semibold text-gray-900">Filters</h2>
-                  {hasActiveFilters && (
-                    <Link 
-                      href="/products"
-                      className="text-xs font-semibold text-red-600 hover:text-red-700"
-                    >
-                      Clear All
-                    </Link>
-                  )}
-                </div>
-                <FacetsSidebar facets={result.facets} />
-              </div>
+ 	    <div className="pointer-events-none fixed inset-0 z-0 opacity-10">
+        <div className="grid-overlay h-full w-full" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-10 lg:flex-row">
+          <aside className="w-full rounded-3xl border border-white/10 bg-[rgba(2,6,23,0.65)] p-6 backdrop-blur lg:w-72">
+            <div className="flex items-center justify-between text-sm font-semibold uppercase tracking-wide text-white">
+              <span>Filters</span>
+              {hasActiveFilters && (
+                <Link href="/products" className="text-xs text-blue-300 hover:text-white">
+                  Clear
+                </Link>
+              )}
+            </div>
+            <div className="mt-6 space-y-4 border-t border-white/10 pt-6">
+              <FacetsSidebar facets={result.facets} />
             </div>
           </aside>
 
+          <div className="hidden w-px bg-gradient-to-b from-transparent via-white/15 to-transparent lg:block" />
+
           <main className="flex-1">
             {hasActiveFilters && (
-              <div className="mb-6 flex flex-wrap gap-2 items-center bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
-                <span className="text-sm text-gray-500 font-semibold mr-2">Active Filters</span>
-                
+              <div className="mb-6 flex flex-wrap items-center gap-2 rounded-3xl border border-white/10 bg-white/5 px-5 py-4 text-xs uppercase tracking-wide text-white">
+                <span className="text-blue-200">Active Filters</span>
+
                 {searchParams.q && (
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-                    Search: {searchParams.q}
+                  <span className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-1 text-blue-200">
+                    Search:
+                    <span className="font-mono text-white">{searchParams.q}</span>
                   </span>
                 )}
 
                 {searchParams.category && (
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
-                    Category: {searchParams.category}
+                  <span className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-1 text-emerald-200">
+                    Category:
+                    <span className="font-mono text-white">{searchParams.category}</span>
                   </span>
                 )}
 
-                {Object.entries(activeFilters).map(([key, values]) => (
-                  values.map(val => (
-                     <span key={`${key}-${val}`} className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700">
-                       {key.replace('attr_', '').toUpperCase()}: {val}
-                     </span>
-                  ))
-                ))}
-
-                {hasActiveFilters && (
-                  <Link
-                    href="/products"
-                    className="ml-auto inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-semibold text-gray-700 hover:bg-gray-100"
-                  >
-                    Clear All
-                  </Link>
+                {Object.entries(activeFilters).flatMap(([key, values]) =>
+                  values.map((val) => (
+                    <span
+                      key={`${key}-${val}`}
+                      className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-1 text-white"
+                    >
+                      {key.replace('attr_', '').toUpperCase()}:
+                      <span className="font-mono">{val}</span>
+                    </span>
+                  )),
                 )}
+
+                <Link
+                  href="/products"
+                  className="ml-auto inline-flex items-center rounded-full border border-white/20 px-3 py-1 text-[color:var(--color-text-muted)] hover:text-white"
+                >
+                  Clear All
+                </Link>
               </div>
             )}
 
-            <div className="mb-6 flex flex-wrap justify-between items-center gap-4">
-              <h2 className="text-xl font-semibold text-gray-900">
-                {result.total} Products Found
+            <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+              <h2 className="text-lg font-semibold text-white">
+                {result.total} SKUs indexed · Page {page}/{result.totalPages || 1}
               </h2>
-              <span className="text-sm text-gray-500">Page {page} of {result.totalPages}</span>
+              <span className="text-xs uppercase tracking-wide text-[color:var(--color-text-muted)]">
+                DIN / ISO / ANSI · Live stock snapshots
+              </span>
             </div>
 
-            {result.hits.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {searchError ? (
+              <div className="rounded-3xl border border-dashed border-red-500/40 bg-red-500/10 px-6 py-6 text-sm text-red-100">
+                {searchError}
+              </div>
+            ) : result.hits.length > 0 ? (
+              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                 {result.hits.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>
             ) : (
-              <div className="text-center py-24 border-2 border-dashed border-gray-200 rounded-2xl bg-white">
-                <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                <h3 className="mt-2 text-sm font-medium text-gray-900">No products found</h3>
-                <p className="mt-1 text-sm text-gray-500">Try adjusting your search or filters.</p>
-                <div className="mt-6">
-                  <Link href="/products" className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-semibold rounded-xl text-white bg-blue-600 hover:bg-blue-700">
-                    Clear all filters
-                  </Link>
-                </div>
+              <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-white/20 bg-white/5 px-6 py-20 text-center text-white">
+                <span className="mb-4 text-4xl">⌁</span>
+                <p className="text-lg font-semibold">No matching components found</p>
+                <p className="mt-2 text-[color:var(--color-text-muted)]">
+                  Adjust diameter, material, standard or search terms to restore results。
+                </p>
+                <Link
+                  href="/products"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm uppercase tracking-wide text-white hover:border-blue-400"
+                >
+                  Reset Filters
+                </Link>
               </div>
             )}
 
             {result.totalPages > 1 && (
-              <div className="mt-12 flex justify-center gap-2">
+              <div className="mt-12 flex justify-center gap-3">
                 {page > 1 && (
-                   <Link
-                     href={`/products?${new URLSearchParams({...searchParams, page: (page - 1).toString()} as any).toString()}`}
-                     className="px-4 py-2 border border-gray-300 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50"
-                   >
-                     Previous
-                   </Link>
+                  <Link
+                    href={`/products?${new URLSearchParams({ ...searchParams, page: String(page - 1) } as any).toString()}`}
+                    className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white hover:border-blue-400"
+                  >
+                    Previous
+                  </Link>
                 )}
-                <span className="px-4 py-2 border border-blue-600 bg-blue-50 text-blue-600 rounded-xl text-sm font-semibold">
+                <span className="rounded-full border border-blue-400/50 px-4 py-2 text-sm font-semibold text-blue-200">
                   {page}
                 </span>
                 {page < result.totalPages && (
-                   <Link
-                     href={`/products?${new URLSearchParams({...searchParams, page: (page + 1).toString()} as any).toString()}`}
-                     className="px-4 py-2 border border-gray-300 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50"
-                   >
-                     Next
-                   </Link>
+                  <Link
+                    href={`/products?${new URLSearchParams({ ...searchParams, page: String(page + 1) } as any).toString()}`}
+                    className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white hover:border-blue-400"
+                  >
+                    Next
+                  </Link>
                 )}
               </div>
             )}

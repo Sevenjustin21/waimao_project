@@ -10,85 +10,80 @@ export default function ApiDocsPage() {
   }, []);
 
   if (!mounted) {
-    return <div className="p-8">加载中...</div>;
+    return <div className="p-8">Loading...</div>;
   }
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-4">WAIMO API 文档</h1>
-        <p className="text-gray-600 mb-8">B2B 工业品外贸平台 API 接口文档</p>
+      <div className="mx-auto max-w-4xl">
+        <h1 className="mb-4 text-4xl font-bold">WAIMO API Reference</h1>
+        <p className="mb-8 text-gray-600">
+          API endpoints that power the WAIMO B2B industrial fastener platform.
+        </p>
 
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-          <h2 className="text-2xl font-bold mb-4">📚 API 端点列表</h2>
+        <div className="mb-8 rounded-lg bg-white p-8 shadow-md">
+          <h2 className="mb-4 text-2xl font-bold">📚 API Endpoint Catalog</h2>
 
           {/* Search API */}
-          <div className="mb-8 pb-8 border-b">
-            <div className="flex items-center mb-4">
-              <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded font-mono font-bold mr-3">
+          <div className="mb-8 border-b pb-8">
+            <div className="mb-4 flex items-center">
+              <span className="mr-3 rounded bg-blue-100 px-3 py-1 font-mono font-bold text-blue-800">
                 GET
               </span>
               <code className="font-mono text-lg">/api/search/products</code>
             </div>
-            <p className="text-gray-700 mb-3">
-              搜索产品库，支持全文搜索、Faceted Navigation 多维筛选
+            <p className="mb-3 text-gray-700">
+              Search the product catalog with full text queries and faceted filters.
             </p>
-            <div className="bg-gray-50 p-4 rounded mb-3">
-              <p className="font-semibold mb-2">查询参数:</p>
+            <div className="mb-3 rounded bg-gray-50 p-4">
+              <p className="mb-2 font-semibold">Query parameters</p>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <code className="bg-gray-200 px-2 py-1">q</code> - 搜索关键词
-                  (必填)
+                  <code className="bg-gray-200 px-2 py-1">q</code> – Search keywords (required)
                 </li>
                 <li>
-                  <code className="bg-gray-200 px-2 py-1">category</code> -
-                  分类筛选
+                  <code className="bg-gray-200 px-2 py-1">category</code> – Category filter
                 </li>
                 <li>
-                  <code className="bg-gray-200 px-2 py-1">material</code> -
-                  材质筛选
+                  <code className="bg-gray-200 px-2 py-1">material</code> – Material filter
                 </li>
                 <li>
-                  <code className="bg-gray-200 px-2 py-1">page</code> - 分页
-                  (默认: 1)
+                  <code className="bg-gray-200 px-2 py-1">page</code> – Page index (default: 1)
                 </li>
                 <li>
-                  <code className="bg-gray-200 px-2 py-1">limit</code> -
-                  每页数量 (默认: 20)
+                  <code className="bg-gray-200 px-2 py-1">limit</code> – Page size (default: 20)
                 </li>
               </ul>
             </div>
             <p className="text-sm text-gray-600">
-              示例:{' '}
-              <code className="bg-gray-200 px-2 py-1">
-                /api/search/products?q=bolt&category=fasteners
-              </code>
+              Example:{' '}
+              <code className="bg-gray-200 px-2 py-1">/api/search/products?q=bolt&category=fasteners</code>
             </p>
           </div>
 
           {/* Inquiries API */}
-          <div className="mb-8 pb-8 border-b">
-            <div className="flex items-center mb-4">
-              <span className="bg-green-100 text-green-800 px-3 py-1 rounded font-mono font-bold mr-3">
+          <div className="mb-8 border-b pb-8">
+            <div className="mb-4 flex items-center">
+              <span className="mr-3 rounded bg-green-100 px-3 py-1 font-mono font-bold text-green-800">
                 GET/POST
               </span>
               <code className="font-mono text-lg">/api/inquiries</code>
             </div>
-            <p className="text-gray-700 mb-3">
-              管理客户询价 (RFQ)，支持 CRUD 操作和邮件通知
+            <p className="mb-3 text-gray-700">
+              Manage customer RFQs with list + create operations and automatic email notifications.
             </p>
 
-            <div className="bg-blue-50 p-4 rounded mb-3">
-              <p className="font-semibold mb-2">GET - 获取所有询价</p>
-              <p className="text-sm text-gray-700">返回分页的询价列表</p>
+            <div className="mb-3 rounded bg-blue-50 p-4">
+              <p className="mb-2 font-semibold">GET – Fetch all inquiries</p>
+              <p className="text-sm text-gray-700">Returns a paginated list including status, contact, and items.</p>
             </div>
 
-            <div className="bg-green-50 p-4 rounded mb-3">
-              <p className="font-semibold mb-2">POST - 提交新询价</p>
-              <p className="text-sm text-gray-700 mb-2">
-                创建新的客户询价，自动发送确认邮件
+            <div className="rounded bg-green-50 p-4">
+              <p className="mb-2 font-semibold">POST – Submit a new inquiry</p>
+              <p className="mb-2 text-sm text-gray-700">
+                Creates a customer RFQ and sends confirmation to both customer and internal reviewers.
               </p>
-              <p className="text-sm font-mono bg-gray-100 p-2 rounded">
+              <p className="rounded bg-gray-100 p-2 font-mono text-sm">
                 {`{`}
                 <br />
                 {`  "company_name": "ACME Corp",`}
@@ -99,7 +94,7 @@ export default function ApiDocsPage() {
                 <br />
                 {`  "quantity": 1000,`}
                 <br />
-                {`  "special_requests": "需要加急"`}
+                {`  "special_requests": "Need PPAP L3 + black oxide"`}
                 <br />
                 {`}`}
               </p>
@@ -107,153 +102,95 @@ export default function ApiDocsPage() {
           </div>
 
           {/* Inquiry Detail API */}
-          <div className="mb-8 pb-8 border-b">
-            <div className="flex items-center mb-4">
-              <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded font-mono font-bold mr-3">
+          <div className="mb-8 border-b pb-8">
+            <div className="mb-4 flex items-center">
+              <span className="mr-3 rounded bg-purple-100 px-3 py-1 font-mono font-bold text-purple-800">
                 GET/PATCH/DELETE
               </span>
               <code className="font-mono text-lg">/api/inquiries/[id]</code>
             </div>
-            <p className="text-gray-700 mb-3">
-              管理单个询价，更新状态、添加报价、删除记录
+            <p className="mb-3 text-gray-700">
+              Manage a single inquiry: update status, upload pricing, or remove obsolete entries.
             </p>
-            <div className="bg-gray-50 p-4 rounded text-sm">
+            <div className="rounded bg-gray-50 p-4 text-sm">
               <p>
-                <strong>GET</strong> - 获取询价详情
+                <strong>GET</strong> – Retrieve inquiry details
               </p>
               <p>
-                <strong>PATCH</strong> - 更新询价状态或报价
+                <strong>PATCH</strong> – Update status, add quote references, or attach files
               </p>
               <p>
-                <strong>DELETE</strong> - 删除询价记录
+                <strong>DELETE</strong> – Remove an inquiry record
               </p>
             </div>
           </div>
 
-          {/* Inquiry Status API */}
-          <div className="mb-8 pb-8 border-b">
-            <div className="flex items-center mb-4">
-              <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded font-mono font-bold mr-3">
-                PATCH
-              </span>
-              <code className="font-mono text-lg">
-                /api/inquiries/[id]/status
-              </code>
-            </div>
-            <p className="text-gray-700 mb-3">
-              更新询价状态 (new, processing, quoted, closed)
-            </p>
-            <div className="bg-gray-50 p-4 rounded text-sm font-mono">
-              {`{`}
-              <br />
-              {`  "status": "quoted",`}
-              <br />
-              {`  "unit_price": 2.50,`}
-              <br />
-              {`  "currency": "USD",`}
-              <br />
-              {`  "delivery_date": "2026-02-15"`}
-              <br />
-              {`}`}
-            </div>
-          </div>
-
-          {/* Health Check API */}
-          <div className="mb-8 pb-8 border-b">
-            <div className="flex items-center mb-4">
-              <span className="bg-red-100 text-red-800 px-3 py-1 rounded font-mono font-bold mr-3">
-                GET
-              </span>
+          {/* Health API */}
+          <div className="mb-8 border-b pb-8">
+            <div className="mb-4 flex items-center">
+              <span className="mr-3 rounded bg-amber-100 px-3 py-1 font-mono font-bold text-amber-800">GET</span>
               <code className="font-mono text-lg">/api/health</code>
             </div>
-            <p className="text-gray-700 mb-3">
-              系统健康检查，检查数据库、Redis、Meilisearch 等服务状态
+            <p className="text-gray-700">
+              Lightweight readiness probe used by uptime monitors and container orchestration.
             </p>
-            <div className="bg-green-50 p-4 rounded text-sm">
-              <p className="font-semibold mb-2">返回示例:</p>
-              <div className="font-mono text-xs">
-                {`{`}
-                <br />
-                {`  "status": "healthy",`}
-                <br />
-                {`  "services": {`}
-                <br />
-                {`    "database": "ok",`}
-                <br />
-                {`    "redis": "ok",`}
-                <br />
-                {`    "meilisearch": "ok"`}
-                <br />
-                {`  }`}
-                <br />
-                {`}`}
-              </div>
-            </div>
           </div>
 
           {/* Reindex API */}
-          <div className="mb-8 pb-8 border-b">
-            <div className="flex items-center mb-4">
-              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded font-mono font-bold mr-3">
-                POST
-              </span>
+          <div className="mb-8 border-b pb-8">
+            <div className="mb-4 flex items-center">
+              <span className="mr-3 rounded bg-red-100 px-3 py-1 font-mono font-bold text-red-800">POST</span>
               <code className="font-mono text-lg">/api/reindex</code>
             </div>
-            <p className="text-gray-700 mb-3">
-              手动触发 Meilisearch 索引重建（管理员专用）
+            <p className="mb-3 text-gray-700">
+              Rebuilds the Meilisearch index from Directus data. Requires admin authentication.
             </p>
             <p className="text-sm text-gray-600">
-              当产品数据大量变化时使用，重建搜索索引通常需要 2-5 分钟
+              Typical runs finish in 2–5 minutes depending on catalog size and queue load.
             </p>
           </div>
 
-          {/* Webhook API */}
-          <div className="mb-8">
-            <div className="flex items-center mb-4">
-              <span className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded font-mono font-bold mr-3">
-                POST
-              </span>
-              <code className="font-mono text-lg">
-                /api/webhook/directus
-              </code>
+          {/* Directus Webhook */}
+          <div>
+            <div className="mb-4 flex items-center">
+              <span className="mr-3 rounded bg-indigo-100 px-3 py-1 font-mono font-bold text-indigo-800">POST</span>
+              <code className="font-mono text-lg">/api/webhook/directus</code>
             </div>
-            <p className="text-gray-700 mb-3">
-              Directus CMS Webhook 接收端点，接收产品变更事件自动更新搜索索引
+            <p className="mb-3 text-gray-700">
+              Endpoint that receives Directus CMS webhooks to sync product changes back into search indices.
             </p>
-            <p className="text-sm text-gray-600">
-              由 Directus 自动调用，手动调用无效果
-            </p>
+            <p className="text-sm text-gray-600">Triggered automatically by Directus—manual calls are ignored.</p>
           </div>
         </div>
 
         {/* Auth & Headers */}
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-          <h2 className="text-2xl font-bold mb-4">🔐 认证与请求头</h2>
+        <div className="mb-8 rounded-lg bg-white p-8 shadow-md">
+          <h2 className="mb-4 text-2xl font-bold">🔐 Authentication & Headers</h2>
 
           <div className="mb-6">
-            <h3 className="font-bold mb-2">公开端点（无需认证）</h3>
-            <ul className="list-disc list-inside text-gray-700 space-y-1">
-              <li>/api/search/products - 搜索产品</li>
-              <li>/api/inquiries (POST) - 提交新询价</li>
-              <li>/api/health - 系统健康检查</li>
+            <h3 className="mb-2 font-bold">Public endpoints (no auth)</h3>
+            <ul className="list-inside list-disc space-y-1 text-gray-700">
+              <li>/api/search/products – Product search</li>
+              <li>/api/inquiries (POST) – Submit new RFQ</li>
+              <li>/api/health – Health probe</li>
             </ul>
           </div>
 
           <div className="mb-6">
-            <h3 className="font-bold mb-2">需要认证的端点</h3>
-            <ul className="list-disc list-inside text-gray-700 space-y-1">
-              <li>/api/inquiries (GET) - 获取所有询价</li>
-              <li>/api/inquiries/[id] - 管理单个询价</li>
-              <li>/api/reindex - 手动重建索引</li>
+            <h3 className="mb-2 font-bold">Protected endpoints</h3>
+            <ul className="list-inside list-disc space-y-1 text-gray-700">
+              <li>/api/inquiries (GET) – List inquiries</li>
+              <li>/api/inquiries/[id] – Manage a single inquiry</li>
+              <li>/api/reindex – Rebuild search index</li>
             </ul>
-            <p className="text-sm text-gray-600 mt-3">
-              使用 Directus 管理员账户通过 Authorization Bearer token 认证
+            <p className="mt-3 text-sm text-gray-600">
+              Authenticate with a Directus admin account and provide an Authorization Bearer token.
             </p>
           </div>
 
-          <div className="bg-gray-50 p-4 rounded">
-            <p className="font-semibold mb-2">请求头示例:</p>
-            <div className="font-mono text-sm space-y-1">
+          <div className="rounded bg-gray-50 p-4">
+            <p className="mb-2 font-semibold">Sample headers</p>
+            <div className="space-y-1 font-mono text-sm">
               <div>Content-Type: application/json</div>
               <div>Authorization: Bearer [DIRECTUS_TOKEN]</div>
             </div>
@@ -261,80 +198,68 @@ export default function ApiDocsPage() {
         </div>
 
         {/* Error Handling */}
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-          <h2 className="text-2xl font-bold mb-4">⚠️ 错误处理</h2>
+        <div className="mb-8 rounded-lg bg-white p-8 shadow-md">
+          <h2 className="mb-4 text-2xl font-bold">⚠️ Error Handling</h2>
 
           <div className="space-y-4">
-            <div className="bg-red-50 p-4 rounded">
-              <p className="font-mono font-bold mb-2">400 Bad Request</p>
-              <p className="text-sm">
-                请求参数无效，检查必填字段和数据格式
-              </p>
+            <div className="rounded bg-red-50 p-4">
+              <p className="mb-2 font-mono font-bold">400 Bad Request</p>
+              <p className="text-sm">Invalid parameters—check required fields and data formats.</p>
             </div>
-
-            <div className="bg-red-50 p-4 rounded">
-              <p className="font-mono font-bold mb-2">401 Unauthorized</p>
-              <p className="text-sm">缺少或无效的认证令牌</p>
+            <div className="rounded bg-red-50 p-4">
+              <p className="mb-2 font-mono font-bold">401 Unauthorized</p>
+              <p className="text-sm">Missing or invalid authentication token.</p>
             </div>
-
-            <div className="bg-red-50 p-4 rounded">
-              <p className="font-mono font-bold mb-2">404 Not Found</p>
-              <p className="text-sm">资源不存在或端点不存在</p>
+            <div className="rounded bg-red-50 p-4">
+              <p className="mb-2 font-mono font-bold">404 Not Found</p>
+              <p className="text-sm">The resource or endpoint does not exist.</p>
             </div>
-
-            <div className="bg-red-50 p-4 rounded">
-              <p className="font-mono font-bold mb-2">500 Internal Server Error</p>
-              <p className="text-sm">
-                服务器错误，查看 CloudWatch 日志获取详细信息
-              </p>
+            <div className="rounded bg-red-50 p-4">
+              <p className="mb-2 font-mono font-bold">500 Internal Server Error</p>
+              <p className="text-sm">Server-side failure—inspect logs (CloudWatch / Next.js) for detail.</p>
             </div>
           </div>
         </div>
 
         {/* Test Tools */}
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <h2 className="text-2xl font-bold mb-4">🧪 测试工具</h2>
+        <div className="rounded-lg bg-white p-8 shadow-md">
+          <h2 className="mb-4 text-2xl font-bold">🧪 Test Tools</h2>
 
           <div className="space-y-4">
             <div className="border-l-4 border-blue-500 bg-blue-50 p-4">
-              <p className="font-bold mb-1">cURL</p>
-              <code className="block text-xs bg-gray-100 p-2 rounded overflow-x-auto">
+              <p className="mb-1 font-bold">cURL</p>
+              <code className="block overflow-x-auto rounded bg-gray-100 p-2 text-xs">
                 {`curl -X GET "http://localhost:3000/api/search/products?q=bolt"`}
               </code>
             </div>
-
             <div className="border-l-4 border-green-500 bg-green-50 p-4">
-              <p className="font-bold mb-1">Postman / Insomnia</p>
+              <p className="mb-1 font-bold">Postman / Insomnia</p>
               <p className="text-sm">
-                使用 REST 客户端工具导入 OpenAPI 规范文件（待实现）
+                Import the REST endpoints above or hook up the forthcoming OpenAPI spec to share collections.
               </p>
             </div>
-
             <div className="border-l-4 border-purple-500 bg-purple-50 p-4">
-              <p className="font-bold mb-1">JavaScript Fetch</p>
-              <code className="block text-xs bg-gray-100 p-2 rounded overflow-x-auto">
-                {`fetch('/api/search/products?q=bolt')
-  .then(r => r.json())
-  .then(data => console.log(data))`}
+              <p className="mb-1 font-bold">JavaScript Fetch</p>
+              <code className="block overflow-x-auto rounded bg-gray-100 p-2 text-xs">
+                {`fetch('/api/search/products?q=bolt')\n  .then(r => r.json())\n  .then(data => console.log(data))`}
               </code>
             </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="mt-12 text-center text-gray-600 text-sm">
-          <p>WAIMO API 文档 v1.0</p>
+        <div className="mt-12 text-center text-sm text-gray-600">
+          <p>WAIMO API Reference v1.0</p>
           <p className="mt-2">
-            详细文档请参考项目 README 和{' '}
-            <a
-              href="/docs"
-              className="text-blue-600 hover:underline"
-            >
-              完整文档
+            For deeper integration guides please review the project README and{' '}
+            <a href="/docs" className="text-blue-600 hover:underline">
+              companion documentation
             </a>
+            .
           </p>
         </div>
       </div>
     </div>
   );
 }
+

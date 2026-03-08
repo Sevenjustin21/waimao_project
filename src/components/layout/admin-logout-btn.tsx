@@ -5,7 +5,7 @@ export default function AdminLogoutBtn() {
   return (
     <button
       onClick={() => signOut({ callbackUrl: "/" })}
-      className="text-xs text-slate-400 hover:text-white transition-colors border border-slate-700 px-2 py-1 rounded"
+      className="rounded-full border border-[var(--color-border)] px-4 py-1 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)] transition hover:border-[var(--color-primary)] hover:text-white"
     >
       Logout
     </button>

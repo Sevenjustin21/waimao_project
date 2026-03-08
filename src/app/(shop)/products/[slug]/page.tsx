@@ -284,30 +284,23 @@ export default async function ProductDetailPage({ params }: Props) {
               <div className="hidden peer-checked/specs:block">
                 <h4 className="text-xl font-bold text-gray-900 mb-6">Technical Specifications</h4>
                 <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
-                  {specs.length === 0 ? (
-                    <div className="p-6 text-center text-gray-500">No detailed specifications available.</div>
-                  ) : (
-                    <table className="min-w-full divide-y divide-gray-200">
-                      <thead className="bg-gray-50">
-                        <tr>
-                          <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Attribute</th>
-                          <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Value</th>
-                        </tr>
-                      </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
-                        {specs.map((attr: any, idx: number) => {
-                          const name = attr.attribute_id?.name || attr.attribute_id?.key;
-                          const val = attr.attribute_id?.type === 'number' ? attr.value_number : attr.value_text;
-                          return (
-                            <tr key={idx} className={idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-1/3">{name}</td>
-                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{val}</td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  )}
+                {specs.length === 0 ? (
+                  <div className="p-6 text-center text-gray-500">No detailed specifications available.</div>
+                ) : (
+                  <div className="divide-y divide-dashed divide-gray-200">
+                    {specs.map((attr: any, idx: number) => {
+                      const name = attr.attribute_id?.name || attr.attribute_id?.key;
+                      const val = attr.attribute_id?.type === 'number' ? attr.value_number : attr.value_text;
+                      return (
+                        <div key={idx} className="flex items-center gap-4 py-4 text-sm">
+                          <span className="w-48 text-xs uppercase tracking-wide text-gray-500">{name}</span>
+                          <span className="flex-1 border-t border-dotted border-gray-300" />
+                          <span className="w-48 text-right font-semibold text-gray-900">{val}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
                 </div>
               </div>
 

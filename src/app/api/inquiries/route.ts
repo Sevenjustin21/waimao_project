@@ -6,7 +6,7 @@ import { authOptions } from '@/lib/auth';
 import { directus } from '@/lib/directus';
 import { createItem, createItems } from '@directus/sdk';
 import { createRateLimiter } from '@/lib/rate-limit';
-import { getResolvedEmailConfig } from '@/lib/email-settings';
+import { getResolvedEmailConfig, shouldUseSmtpAuth } from '@/lib/email-settings';
 
 const ipBurstLimiter = createRateLimiter({
   windowMs: 60 * 1000,
@@ -71,12 +71,15 @@ async function sendNotification(inquiry: any, items: any[]) {
     host: emailConfig.host,
     port: emailConfig.port,
     secure: emailConfig.secure,
-    auth: {
-      user: emailConfig.user,
-      pass: emailConfig.pass,
-    },
-    connectionTimeout: 5000,
-    socketTimeout: 5000,
+    auth: shouldUseSmtpAuth(emailConfig)
+      ? {
+          user: emailConfig.user,
+          pass: emailConfig.pass,
+        }
+      : undefined,
+    connectionTimeout: 15000,
+    socketTimeout: 15000,
+    greetingTimeout: 15000,
   });
 
   const safeName = escapeHtml(inquiry.customer_name || 'Unknown');
@@ -230,6 +233,20 @@ export async function POST(req: NextRequest) {
 
     const session = await getServerSession(authOptions);
 
+    let normalizedItems: any[] = [];
+    if (Array.isArray(body.items) && body.items.length > 0) {
+      normalizedItems = body.items.slice(0, MAX_ITEMS).map((item: any) => {
+        const productId = typeof item.product_id === 'string' ? item.product_id.trim() : null;
+        const quantityValue = Number.parseInt(item.quantity, 10);
+        return {
+          inquiry_id: undefined,
+          product_id: productId && productId.length > 0 ? productId : null,
+          quantity: Math.max(1, Math.min(100000, Number.isFinite(quantityValue) ? quantityValue : 1)),
+          remark: typeof item.remark === 'string' ? item.remark.slice(0, 200) : null,
+        };
+      });
+    }
+
     const inquiryPayload = {
       customer_name,
       email,
@@ -241,20 +258,18 @@ export async function POST(req: NextRequest) {
 
     const inquiry = await directus.request(createItem('inquiries', inquiryPayload as any));
 
-    let normalizedItems: any[] = [];
-    if (Array.isArray(body.items) && body.items.length > 0) {
-      normalizedItems = body.items.slice(0, MAX_ITEMS).map((item: any) => {
-        const productId = typeof item.product_id === 'string' ? item.product_id.trim() : null;
-        const quantityValue = Number.parseInt(item.quantity, 10);
-        return {
-          inquiry_id: inquiry.id,
-          product_id: productId && productId.length > 0 ? productId : null,
-          quantity: Math.max(1, Math.min(100000, Number.isFinite(quantityValue) ? quantityValue : 1)),
-          remark: typeof item.remark === 'string' ? item.remark.slice(0, 200) : null,
-        };
-      });
-
-      await directus.request(createItems('inquiry_items', normalizedItems as any));
+    if (normalizedItems.length > 0) {
+      await directus.request(
+        createItems(
+          'inquiry_items',
+          normalizedItems.map((item) => ({
+            inquiry_id: inquiry.id,
+            product_id: item.product_id,
+            quantity: item.quantity,
+            remark: item.remark,
+          })) as any,
+        ),
+      );
     }
 
     console.log(`[RFQ] Success: Inquiry ${inquiry.id} created for request ${requestId}`);

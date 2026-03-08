@@ -16,102 +16,92 @@ export default async function InquiryDetailPage({ params }: { params: { id: stri
   const inquiry = await getInquiry(params.id);
 
   if (!inquiry) {
-    return <div>Inquiry not found</div>;
+    return <div className="px-6 py-10 text-center text-white/70">Inquiry not found</div>;
   }
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
-      <div className="mb-6 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+    <div className="mx-auto max-w-4xl px-4 py-10 text-white">
+      <div className="mb-6 flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <Link href="/admin/inquiries" className="text-blue-600 hover:underline text-sm font-semibold">
+          <Link href="/admin/inquiries" className="text-blue-200 hover:text-white text-xs uppercase tracking-[0.3em]">
             &larr; Back to List
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900 mt-2">Inquiry Details</h1>
-          <p className="text-sm text-gray-500">{inquiry.id}</p>
+          <h1 className="mt-2 text-3xl font-semibold text-white">Inquiry Details</h1>
+          <p className="text-sm text-white/60">{inquiry.id}</p>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-gray-500 text-sm">Status</span>
+          <span className="text-xs uppercase tracking-[0.3em] text-white/60">Status</span>
           <StatusButtons id={inquiry.id} currentStatus={inquiry.status || 'new'} />
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-8">
-        <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
-          <h2 className="text-base font-semibold text-gray-900">Customer Information</h2>
+      <div className="rounded-3xl border border-white/10 bg-white/5 shadow-xl backdrop-blur">
+        <div className="border-b border-white/10 px-6 py-4">
+          <h2 className="text-lg font-semibold text-white">Customer Information</h2>
         </div>
-        <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid gap-6 px-6 py-6 md:grid-cols-2">
           <div>
-            <label className="block text-sm font-medium text-gray-500">Customer Name</label>
-            <div className="mt-1 text-lg text-gray-900">
+            <p className="text-xs uppercase tracking-[0.3em] text-white/50">Customer Name</p>
+            <div className="mt-2 text-xl font-semibold text-white">
               {inquiry.customer_name}
               {inquiry.app_user_id && (
-                <span className="ml-2 px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-800 align-middle">
+                <span className="ml-3 rounded-full bg-purple-500/20 px-3 py-1 text-xs font-semibold text-purple-100">
                   Registered
                 </span>
               )}
             </div>
-            {inquiry.app_user_id && (
-               <div className="text-xs text-gray-400 mt-1">ID: {inquiry.app_user_id}</div>
-            )}
+            {inquiry.app_user_id && <div className="text-xs text-white/50 mt-1">ID: {inquiry.app_user_id}</div>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-500">Date Created</label>
-            <div className="mt-1 text-gray-900">
-              {new Date(inquiry.date_created).toLocaleString()}
-            </div>
+            <p className="text-xs uppercase tracking-[0.3em] text-white/50">Date Created</p>
+            <div className="mt-2 text-white/80">{new Date(inquiry.date_created).toLocaleString()}</div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-500">Email</label>
-            <div className="mt-1 text-gray-900">{inquiry.email}</div>
+            <p className="text-xs uppercase tracking-[0.3em] text-white/50">Email</p>
+            <div className="mt-2 text-white/80">{inquiry.email}</div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-500">Company</label>
-            <div className="mt-1 text-gray-900">{inquiry.company || '-'}</div>
+            <p className="text-xs uppercase tracking-[0.3em] text-white/50">Company</p>
+            <div className="mt-2 text-white/80">{inquiry.company || '-'}</div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-500">Country</label>
-            <div className="mt-1 text-gray-900">{inquiry.country || '-'}</div>
+            <p className="text-xs uppercase tracking-[0.3em] text-white/50">Country</p>
+            <div className="mt-2 text-white/80">{inquiry.country || '-'}</div>
           </div>
         </div>
-        <div className="px-6 py-4 border-t border-gray-200">
-          <label className="block text-sm font-medium text-gray-500 mb-2">Message</label>
-          <div className="bg-gray-50 p-4 rounded text-gray-800 whitespace-pre-wrap">
+        <div className="border-t border-white/10 px-6 py-5">
+          <p className="text-xs uppercase tracking-[0.3em] text-white/50">Message</p>
+          <div className="mt-2 rounded-2xl bg-black/30 p-4 text-sm text-white/80 whitespace-pre-wrap">
             {inquiry.message || 'No message'}
           </div>
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
-          <h2 className="text-lg font-bold text-gray-900">Items ({inquiry.items?.length || 0})</h2>
+      <div className="mt-8 rounded-3xl border border-white/10 bg-white/5 shadow-xl backdrop-blur">
+        <div className="border-b border-white/10 px-6 py-4">
+          <h2 className="text-lg font-semibold text-white">Items ({inquiry.items?.length || 0})</h2>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+          <table className="min-w-full divide-y divide-white/10 text-sm">
+            <thead className="bg-white/5 text-xs uppercase tracking-[0.3em] text-white/60">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product ID</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Remark</th>
+                <th className="px-6 py-3 text-left">Product ID</th>
+                <th className="px-6 py-3 text-left">Quantity</th>
+                <th className="px-6 py-3 text-left">Remark</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200 bg-white">
+            <tbody className="divide-y divide-white/10">
               {inquiry.items && inquiry.items.length > 0 ? (
                 inquiry.items.map((item: InquiryItem) => (
-                  <tr key={item.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {item.product_id || 'N/A'}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {item.quantity}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
-                      {item.remark || '-'}
-                    </td>
+                  <tr key={item.id} className="text-white/80">
+                    <td className="px-6 py-4 whitespace-nowrap">{item.product_id || 'N/A'}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{item.quantity}</td>
+                    <td className="px-6 py-4 text-white/60">{item.remark || '-'}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan={3} className="px-6 py-4 text-center text-sm text-gray-500">
+                  <td colSpan={3} className="px-6 py-6 text-center text-white/60">
                     No items found
                   </td>
                 </tr>

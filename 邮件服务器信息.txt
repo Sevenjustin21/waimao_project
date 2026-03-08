@@ -1,0 +1,42 @@
+ 邮箱设置怎么填？（现实类比版）
+
+  - From Name / From Email (fromName, fromEmail): 这就像你寄快递时写在包裹上的“寄件人姓名”和“寄件人邮箱”。客户收到邮
+    件时看到的就是这里填的名字和邮箱，一般写公司品牌名（如 “WAIMO Sales”）和你 SMTP 允许发送的域邮箱（如 sales@waimo-
+    industrial.com）。
+  - Notify Recipients (notifyTo): 想象你给同事群发通知，写在“收件人”里的地址就是这里。多个邮箱用逗号或分号隔开。例如
+    ops@waimo.com, qa@waimo.com。客户提交 RFQ 后，系统会把询盘邮件发送到这些地址。
+  - Reply-To: 有点像在名片上写“请回复到某某邮箱”。如果你希望客户直接回到另一个邮箱（比如客服共享邮箱），就在这里填。不填
+    就默认回复到 fromEmail。
+  - Enable SSL (smtpSecure + 端口 465 常用): 类比成你寄快递时选择“保价/加密通道”。如果邮箱供应商告诉你使用加密端口（通常
+    465 对应 SSL），这里打勾。
+  - Test Recipient (表单底部灰色输入框): 想象寄出一封“试投递”的件，先发到你自己的邮箱确认设置没问题。填入任何邮箱，
+    点“Send test email”，系统会用上面的配置发一封测试信。
+  - Clear Password (勾选项): 类似把保险箱密码擦掉，如果打勾并保存，就删除数据库里存的 SMTP 密码，下次一定要重新输入。
+  - Environment fallback 列表: 像是告诉你“如果仓库里有现成备件，就先用备件”。如果某些字段在数据库没填，系统会自动去 .env
+    环境变量里找相同名称的值（绿色表示有备份；灰色表示没提供）。
+
+  按这些字段填写，你的真实 SMTP 服务就能既发出 Contact 表单邮件，也处理 RFQ 通知。
+
+
+
+qq:syeqhsmenjwpddgg
+unbxvlsixswdizyk
+
+PS C:\WINDOWS\system32>  Test-NetConnection -ComputerName smtp.gmail.com -Port 587                                                                                                                                                                                                                                                                                      ComputerName     : smtp.gmail.com
+RemoteAddress    : 173.194.203.108
+RemotePort       : 587
+InterfaceAlias   : WLAN
+SourceAddress    : 192.168.10.3
+TcpTestSucceeded : True
+PS C:\WINDOWS\system32> Test-NetConnection -ComputerName smtp.gmail.com -Port 465
+ComputerName     : smtp.gmail.com
+RemoteAddress    : 173.194.203.108
+RemotePort       : 465
+InterfaceAlias   : WLAN
+SourceAddress    : 192.168.10.3
+TcpTestSucceeded : True
+lenovo@LAPTOP-0A0PMVK0 MINGW64 ~
+$ openssl s_client -connect smtp.gmail.com:465
+Connecting to 173.194.203.108
+CONNECTED(000001BC)
+

@@ -1,60 +1,88 @@
-ï»¿# æœ¬åœ°å¼€å‘è¿è¡Œæ‰‹å†Œ
+# ±¾µØ¿ª·¢ÔËĞĞÊÖ²á
 
-## å‰ç½®è¦æ±‚
+## Ç°ÖÃÒªÇó
 - Node.js 18+
 - npm 9+
 - Docker / Docker Compose V2
-- Chromium/Edge/Firefox ä»»ä¸€æµè§ˆå™¨
+- Chromium/Edge/Firefox ÈÎÒ»ä¯ÀÀÆ÷
 
-## åˆå§‹åŒ–æ­¥éª¤
-1. å…‹éš†ä»“åº“å¹¶è¿›å…¥ç›®å½•ï¼š
+## ³õÊ¼»¯²½Öè
+1. ¿ËÂ¡²Ö¿â²¢½øÈëÄ¿Â¼£º
    ```bash
    git clone https://github.com/Sevenjustin21/waimao_project.git
    cd waimao_project
    ```
-2. å¤åˆ¶ç¯å¢ƒå˜é‡æ¨¡æ¿å¹¶å¡«å†™ï¼š
+2. ¸´ÖÆ»·¾³±äÁ¿Ä£°å²¢ÌîĞ´£º
    ```bash
    cp infra/.env.example .env
-   # æŒ‰æ³¨é‡Šå†™å…¥ Directusã€Postgresã€Redisã€Meiliã€SMTPã€NextAuth ç­‰å€¼
+   # °´×¢ÊÍĞ´Èë Directus¡¢Postgres¡¢Redis¡¢Meili¡¢SMTP¡¢NextAuth µÈÖµ
    ```
-3. å®‰è£…ä¾èµ–ï¼š
+3. °²×°ÒÀÀµ£º
    ```bash
    npm install
    ```
-4. å¯åŠ¨åŸºç¡€æœåŠ¡ï¼š
+4. Æô¶¯»ù´¡·şÎñ£º
    ```bash
    docker compose -f infra/docker-compose.yml up -d
    ```
-   - é»˜è®¤ä¼šæ‹‰èµ· postgresã€redisã€meilisearchã€directus ç­‰å®¹å™¨
-   - å¦‚éœ€æŸ¥çœ‹çŠ¶æ€ï¼š`docker compose ps`
-5. æ‰§è¡Œæ•°æ®åº“è¿ç§»ï¼š
+   - Ä¬ÈÏ»áÀ­Æğ postgres¡¢redis¡¢meilisearch¡¢directus µÈÈİÆ÷
+   - ÈçĞè²é¿´×´Ì¬£º`docker compose ps`
+5. Ö´ĞĞÊı¾İ¿âÇ¨ÒÆ£º
    ```bash
    npx prisma migrate deploy
    ```
-6. åº”ç”¨ Directus schemaï¼ˆéœ€å‡†å¤‡å¥½çš„ snapshot ä¸è„šæœ¬ï¼‰ï¼š
+6. Ó¦ÓÃ Directus schema£¨Ğè×¼±¸ºÃµÄ snapshot Óë½Å±¾£©£º
    ```bash
    npm run schema:apply
    ```
-7. å†™å…¥æ¼”ç¤ºæ•°æ®å¹¶åŒæ­¥æœç´¢ï¼š
+7. Ğ´ÈëÑİÊ¾Êı¾İ²¢Í¬²½ËÑË÷£º
    ```bash
    npm run seed:demo
    npm run reindex
    ```
-   - `scripts/seed-directus.ts` ä»…æ³¨å…¥å›ºå®šçš„å·¥ä¸šç´§å›ºä»¶åˆ†ç±»/å±æ€§/äº§å“ï¼Œæ— çœŸå®å®¢æˆ·æ•°æ®
-   - è„šæœ¬ä¼šåœ¨è¿è¡Œå‰è‡ªæ£€ï¼Œè‹¥å‘ç°ç–‘ä¼¼é‚®ç®±/æ‰‹æœºå·ä¼šç›´æ¥é€€å‡ºï¼Œç¡®ä¿ä¸ä¼šè¯¯æ¤ PII
-   - å¤šæ¬¡æ‰§è¡Œä¼šæ ¹æ® SKU/slug å»é‡ï¼Œå› æ­¤å¯ä»¥éšæ—¶é‡æ”¾ä»¥å›åˆ°æ ‡å‡† demo çŠ¶æ€
-8. å¯åŠ¨ Next.jsï¼š
+   - `scripts/seed-directus.ts` ½ö×¢Èë¹Ì¶¨µÄ¹¤Òµ½ô¹Ì¼ş·ÖÀà/ÊôĞÔ/²úÆ·£¬ÎŞÕæÊµ¿Í»§Êı¾İ
+   - ½Å±¾»áÔÚÔËĞĞÇ°×Ô¼ì£¬Èô·¢ÏÖÒÉËÆÓÊÏä/ÊÖ»úºÅ»áÖ±½ÓÍË³ö£¬È·±£²»»áÎóÖ² PII
+   - ¶à´ÎÖ´ĞĞ»á¸ù¾İ SKU/slug È¥ÖØ£¬Òò´Ë¿ÉÒÔËæÊ±ÖØ·ÅÒÔ»Øµ½±ê×¼ demo ×´Ì¬
+8. Æô¶¯ Next.js£º
    ```bash
    npm run dev
-   # æˆ– npm run build && npm run start
+   # »ò npm run build && npm run start
    ```
 
-## éªŒè¯
-- æµè§ˆå™¨è®¿é—® `http://localhost:3000`ï¼Œç¡®è®¤é¦–é¡µã€äº§å“åˆ—è¡¨ã€RFQ æŒ‰é’®æ¸²æŸ“æ­£å¸¸
-- ç™»å½• `/admin`ï¼Œæ£€æŸ¥äº§å“/ç”¨æˆ·åˆ—è¡¨å¯åŠ è½½
-- é€šè¿‡ DevTools Network é¢æ¿ç¡®è®¤ RFQ/CRUD API èƒ½å¤Ÿå‘å‡ºè¯·æ±‚
-- `docker compose logs -f directus` è§‚å¯Ÿ schema/seed/reindex æ˜¯å¦æŠ¥é”™
+## ÑéÖ¤
+- ä¯ÀÀÆ÷·ÃÎÊ `http://localhost:3000`£¬È·ÈÏÊ×Ò³¡¢²úÆ·ÁĞ±í¡¢RFQ °´Å¥äÖÈ¾Õı³£
+- µÇÂ¼ `/admin`£¬¼ì²é²úÆ·/ÓÃ»§ÁĞ±í¿É¼ÓÔØ
+- Í¨¹ı DevTools Network Ãæ°åÈ·ÈÏ RFQ/CRUD API ÄÜ¹»·¢³öÇëÇó
+- `docker compose logs -f directus` ¹Û²ì schema/seed/reindex ÊÇ·ñ±¨´í
 
-## æ”¶å°¾
-- å…³é—­æœåŠ¡ï¼š`docker compose -f infra/docker-compose.yml down`
-- è‹¥éœ€è¦æ¸…ç†æŒä¹…åŒ–å·ï¼Œé¢å¤–æ‰§è¡Œï¼š`docker volume rm <name>`ï¼ˆè°¨æ…æ“ä½œï¼‰
+## ÊÕÎ²
+- ¹Ø±Õ·şÎñ£º`docker compose -f infra/docker-compose.yml down`
+- ÈôĞèÒªÇåÀí³Ö¾Ã»¯¾í£¬¶îÍâÖ´ĞĞ£º`docker volume rm <name>`£¨½÷É÷²Ù×÷£©
+## Windows npm/Prisma EPERM ??????
+Prisma ?? Windows ?§Ñ?????????? `node_modules\.prisma\client\query_engine-windows.dll.node` ?????????????`npm ci` ?????????? EPERM ??????¡¤???????????????????
+
+1. ??????? node/npm ???????????????????????
+   ```powershell
+   tasklist | findstr /i "node.exe npm.exe"
+   Stop-Process -Name node -Force -ErrorAction SilentlyContinue
+   Stop-Process -Name npm -Force -ErrorAction SilentlyContinue
+   ```
+   ??¦Ä????????????????????????¨¢?Process Explorer???? Resource Monitor??????????????
+2. ???? `node_modules` ????§á??????????????
+   ```powershell
+   Remove-Item -Recurse -Force node_modules
+   Remove-Item package-lock.json -Force
+   git checkout -- package-lock.json
+   ```
+3. ??????¡ê???????????????????
+   ```powershell
+   npm ci
+   where.exe next
+   ```
+   ?????§µ?`npm ci` ???????????? `.prisma` ????? Next.js ????????
+4. ??? Defender/??????????????§Ø????Ñk??????????????????????????¡ã???????
+   ```powershell
+   Add-MpPreference -ExclusionPath "E:\Trae\workspace\waimao"
+   ```
+   ???¨´???????????????????????????????????????????????????????????????
+

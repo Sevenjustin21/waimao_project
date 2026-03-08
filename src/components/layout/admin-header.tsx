@@ -1,43 +1,52 @@
 import Link from 'next/link';
 import AdminLogoutBtn from './admin-logout-btn';
 
+const links = [
+  { href: '/admin/dashboard', label: 'Dashboard' },
+  { href: '/admin/inquiries', label: 'Inquiries' },
+  { href: '/admin/products', label: 'Products' },
+  { href: '/admin/users', label: 'Users' },
+  { href: '/admin/settings/email', label: 'Settings' },
+];
+
 export default function AdminHeader() {
   return (
-    <header className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
-          <div className="flex items-center gap-8">
-            <Link href="/admin/dashboard" className="flex-shrink-0 flex items-center font-bold text-xl text-white tracking-tight">
-              WAIMO <span className="ml-2 text-slate-400 font-normal text-sm">Admin Console</span>
-            </Link>
-            <nav className="hidden md:flex space-x-6">
-              <Link href="/admin/dashboard" className="text-slate-300 hover:text-white font-medium text-sm transition-colors">
-                Dashboard
+    <header className="sticky top-0 z-50 border-b border-[rgba(255,255,255,0.08)] bg-[#05060b]">
+      <div className="mx-auto flex h-[72px] w-full max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-8">
+          <Link
+            href="/admin/dashboard"
+            className="text-sm font-semibold uppercase tracking-[0.45em] text-[var(--color-text-muted)]"
+          >
+            WAIMO
+            <span className="ml-4 text-xs tracking-[0.4em] text-[var(--color-primary)]">
+              CONTROL
+            </span>
+          </Link>
+          <nav className="hidden items-center gap-4 text-xs font-semibold text-[var(--color-text-muted)] md:flex">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="rounded-full px-3 py-1 transition hover:bg-[rgba(255,255,255,0.08)] hover:text-white"
+              >
+                {link.label}
               </Link>
-              <Link href="/admin/inquiries" className="text-slate-300 hover:text-white font-medium text-sm transition-colors">
-                Inquiries
-              </Link>
-              <Link href="/admin/products" className="text-slate-300 hover:text-white font-medium text-sm transition-colors">
-                Products
-              </Link>
-              <Link href="/admin/users" className="text-slate-300 hover:text-white font-medium text-sm transition-colors">
-                Users
-              </Link>
-              <Link href="/admin/settings/email" className="text-slate-300 hover:text-white font-medium text-sm transition-colors">
-                Settings
-              </Link>
-            </nav>
-          </div>
-          
-          <div className="flex items-center gap-4">
-             <div className="text-slate-300 text-sm">
-                Admin
-             </div>
-             <AdminLogoutBtn />
-             <Link href="/" className="text-xs text-blue-400 hover:text-blue-300">
-                View Site &rarr;
-             </Link>
-          </div>
+            ))}
+          </nav>
+        </div>
+        <div className="flex items-center gap-4 text-sm text-[var(--color-text-muted)]">
+          <span className="hidden md:inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] px-4 py-1">
+            <span className="h-2 w-2 rounded-full bg-[var(--color-success)]" />
+            Operational
+          </span>
+          <AdminLogoutBtn />
+          <Link
+            href="/"
+            className="rounded-full border border-[var(--color-border)] px-3 py-1 text-xs uppercase tracking-wide text-[var(--color-text-muted)] hover:text-white"
+          >
+            View Site
+          </Link>
         </div>
       </div>
     </header>

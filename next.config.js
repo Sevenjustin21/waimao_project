@@ -27,11 +27,12 @@ const relaxedConnectSrc = ["'self'", 'ws:', 'wss:', 'data:', ...extraConnectSour
 
 const strictCsp = [
   "default-src 'self'",
-  "script-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https:",
+  "img-src 'self' blob: data: https:",
   "font-src 'self' data:",
   `connect-src ${strictConnectSrc.join(' ')}`,
+  "worker-src 'self' blob:",
   "frame-ancestors 'none'",
 ].join('; ');
 

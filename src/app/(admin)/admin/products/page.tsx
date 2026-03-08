@@ -21,19 +21,19 @@ export default async function AdminProductsPage() {
   const galleryMap = await getGalleryMap(products.map((p) => p.id));
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Products</h1>
+    <div className="mx-auto max-w-7xl px-4 py-8 text-white">
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="text-2xl font-semibold text-white">Products</h1>
         <Link
           href="/admin/products/new"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="inline-flex items-center justify-center rounded-full bg-blue-500 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-400"
         >
           Add Product
         </Link>
       </div>
 
-      <div className="bg-white shadow overflow-hidden sm:rounded-md">
-        <ul className="divide-y divide-gray-200">
+      <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-xl shadow-black/30">
+        <ul className="divide-y divide-white/10">
           {products.map((product: any) => {
             const gallery = galleryMap[product.id] || [];
             const heroId =
@@ -44,9 +44,9 @@ export default async function AdminProductsPage() {
 
             return (
             <li key={product.id}>
-              <div className="px-4 py-4 flex items-center justify-between sm:px-6">
-                <div className="flex items-center">
-                  <div className="relative flex-shrink-0 h-14 w-14 bg-gray-100 rounded overflow-hidden border border-gray-200 flex items-center justify-center">
+              <div className="flex items-center justify-between px-4 py-4 sm:px-6">
+                <div className="flex items-center gap-4">
+                  <div className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-white/15 bg-white/5">
                     {heroUrl ? (
                       <Image
                         src={heroUrl}
@@ -57,41 +57,40 @@ export default async function AdminProductsPage() {
                         unoptimized
                       />
                     ) : (
-                      <span className="text-xs text-gray-400">No Img</span>
+                      <span className="text-xs text-white/60">No Img</span>
                     )}
                   </div>
-                  <div className="ml-4">
-                    <div className="text-sm font-medium text-blue-600 truncate">
-                      {product.name}
-                    </div>
-                    <div className="flex text-sm text-gray-500 gap-2">
-                        <span>SKU: {product.sku}</span>
-                        <span>|</span>
-                        <span>{product.category_id?.name || 'Uncategorized'}</span>
+                  <div>
+                    <div className="text-sm font-semibold text-white">{product.name}</div>
+                    <div className="mt-1 flex flex-wrap gap-2 text-xs text-white/60">
+                      <span>SKU: {product.sku}</span>
+                      <span>·</span>
+                      <span>{product.category_id?.name || 'Uncategorized'}</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                    product.status === 'published' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                  }`}>
+                  <span
+                    className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase ${
+                      product.status === 'published'
+                        ? 'bg-emerald-400/20 text-emerald-100'
+                        : 'bg-white/10 text-white/70'
+                    }`}
+                  >
                     {product.status}
                   </span>
                   <Link
                     href={`/admin/products/${product.id}/edit`}
-                    className="text-indigo-600 hover:text-indigo-900 text-sm"
+                    className="text-sm font-semibold text-blue-200 hover:text-white"
                   >
                     Edit
                   </Link>
-                  {/* Delete button could be here, but usually inside Edit or separate action */}
                 </div>
               </div>
             </li>
           )})}
           {products.length === 0 && (
-            <li className="px-4 py-8 text-center text-gray-500">
-                No products found.
-            </li>
+            <li className="px-4 py-8 text-center text-white/60">No products found.</li>
           )}
         </ul>
       </div>

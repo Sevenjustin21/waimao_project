@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import { getResolvedEmailConfig } from '@/lib/email-settings';
+import { getResolvedEmailConfig, shouldUseSmtpAuth } from '@/lib/email-settings';
 import { withSecurityContext } from '@/lib/security-context';
 
 export const dynamic = 'force-dynamic';
@@ -40,12 +40,22 @@ export const POST = withSecurityContext(async ({ req, context }) => {
       host: config.host,
       port: config.port,
       secure: config.secure,
-      auth: {
-        user: config.user,
-        pass: config.pass,
-      },
-      connectionTimeout: 5000,
-      socketTimeout: 5000,
+      auth: shouldUseSmtpAuth(config)
+        ? {
+            user: config.user,
+            pass: config.pass,
+          }
+        : undefined,
+      connectionTimeout: 15000,
+      socketTimeout: 15000,
+      greetingTimeout: 15000,
+      tls:
+        config.port === 587 && !config.secure
+          ? {
+              rejectUnauthorized: true,
+              ciphers: 'TLSv1.2',
+            }
+          : undefined,
     });
 
     const info = await transporter.sendMail({

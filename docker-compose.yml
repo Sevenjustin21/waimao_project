@@ -1,12 +1,10 @@
-version: '3.8'
+version: "3.8"
 
 services:
   postgres:
     image: postgres:16
     container_name: waimao-postgres
     restart: unless-stopped
-    ports:
-      - "15432:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -18,25 +16,35 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - waimao-net
 
   redis:
     image: redis:7
     container_name: waimao-redis
     restart: unless-stopped
-    ports:
-      - "16379:6379"
+    command:
+      - redis-server
+      - "--appendonly"
+      - "yes"
+      - "--requirepass"
+      - "${REDIS_PASSWORD:-devpassword}"
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-devpassword}
+    volumes:
+      - redis_data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "sh", "-c", "redis-cli -a \"$REDIS_PASSWORD\" ping"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - waimao-net
 
   meilisearch:
     image: getmeili/meilisearch:v1.6
     container_name: waimao-meilisearch
     restart: unless-stopped
-    ports:
-      - "7700:7700"
     environment:
       MEILI_MASTER_KEY: ${MEILI_MASTER_KEY}
     volumes:
@@ -46,13 +54,13 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - waimao-net
 
   directus:
     image: directus/directus:10.10
     container_name: waimao-directus
     restart: unless-stopped
-    ports:
-      - "8055:8055"
     depends_on:
       postgres:
         condition: service_healthy
@@ -70,16 +78,25 @@ services:
       DB_USER: ${POSTGRES_USER}
       DB_PASSWORD: ${POSTGRES_PASSWORD}
       WEBSOCKETS_ENABLED: true
-      REDIS: redis://redis:6379
+      REDIS: redis://:${REDIS_PASSWORD:-devpassword}@redis:6379/0
     volumes:
       - directus_uploads:/directus/uploads
+      - directus_extensions:/directus/extensions
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8055/server/ping"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - waimao-net
 
 volumes:
   postgres_data:
+  redis_data:
   meili_data:
   directus_uploads:
+  directus_extensions:
+
+networks:
+  waimao-net:
+    name: waimao-net

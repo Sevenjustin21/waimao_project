@@ -16,6 +16,7 @@ function SearchBarContent() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams(searchParams.toString());
+    params.delete('filters');
     if (query.trim()) {
       params.set('q', query.trim());
       params.set('page', '1');

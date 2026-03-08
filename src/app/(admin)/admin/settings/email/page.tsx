@@ -23,12 +23,12 @@ export default async function EmailSettingsPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="mb-8">
-        <p className="text-sm font-semibold text-blue-600 uppercase tracking-wide">Admin Console</p>
-        <h1 className="text-3xl font-bold text-gray-900 mt-2">邮件服务器配置</h1>
-        <p className="text-sm text-gray-500 mt-2">
-          这里的配置将覆盖 .env 中的 SMTP/通知邮箱参数，可直接在后台完成修改与测试。
+    <div className="mx-auto max-w-5xl px-4 py-10 text-white">
+      <div className="mb-8 flex flex-col gap-2">
+        <p className="text-xs uppercase tracking-[0.5em] text-blue-200">Admin Console</p>
+        <h1 className="text-3xl font-semibold text-white">邮件服务器配置</h1>
+        <p className="text-sm text-white/70">
+          这里的配置会覆盖 .env 中的 SMTP / 通知邮箱参数，可在后台直接保存并发送测试邮件。
         </p>
       </div>
 

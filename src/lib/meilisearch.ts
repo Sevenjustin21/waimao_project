@@ -425,7 +425,7 @@ export interface SearchProductsParams {
   page?: number;
   pageSize?: number;
   category?: string;
-  filters?: string; // JSON string
+  filters?: string;
   sort?: string;
 }
 
@@ -440,17 +440,11 @@ export interface SearchProductsResult {
 
 export async function searchProducts(params: SearchProductsParams): Promise<SearchProductsResult> {
   const index = meilisearch.index(INDEX_NAME);
-  
-  // 1. 参数默认值与校验
-  const q = params.q || '';
-  const page = (params.page && params.page > 0) ? params.page : 1;
-  const pageSize = (params.pageSize && params.pageSize > 0) ? 
-    (params.pageSize > 50 ? 50 : params.pageSize) : 20;
+  const q = params.q ? params.q.trim() : '';
+  const page = params.page && params.page > 0 ? params.page : 1;
+  const pageSize = params.pageSize && params.pageSize > 0 ? (params.pageSize > 50 ? 50 : params.pageSize) : 20;
 
-  // 2. 构建 Filter 语句
   const filterConditions: string[] = [];
-
-  // 2.1 Category 过滤
   if (params.category) {
     const categoryValue = formatFilterValue(params.category);
     if (categoryValue) {
@@ -458,65 +452,216 @@ export async function searchProducts(params: SearchProductsParams): Promise<Sear
     }
   }
 
-  // 2.2 动态 Filters 解析与校验
-  if (params.filters) {
-    let filtersObj: any;
-    try {
-      filtersObj = JSON.parse(params.filters);
-    } catch (e) {
-      throw new Error('INVALID_FILTERS_JSON');
-    }
-      
-    if (typeof filtersObj !== 'object' || filtersObj === null || Array.isArray(filtersObj)) {
-      throw new Error('INVALID_FILTERS_FORMAT');
-    }
-
-    for (const [key, values] of Object.entries(filtersObj)) {
-      // 安全校验：只允许 category_slug 或 attr_ 开头的字段
+  const parsedFilters = parseFiltersPayload(params.filters);
+  if (parsedFilters) {
+    for (const [key, values] of Object.entries(parsedFilters)) {
       if (key === 'category_slug' || key.startsWith('attr_')) {
         if (Array.isArray(values) && values.length > 0) {
           const sanitizedValues = values
-            .map((v: string | number) => formatFilterValue(v))
+            .map((v) => formatFilterValue(v))
             .filter((v): v is string => Boolean(v));
-
-          if (sanitizedValues.length === 0) {
-            continue;
-          }
-
-          const orConditions = sanitizedValues
-            .map((v) => `${key} = ${v}`)
-            .join(' OR ');
+          if (sanitizedValues.length === 0) continue;
+          const orConditions = sanitizedValues.map((v) => `${key} = ${v}`).join(' OR ');
           filterConditions.push(`(${orConditions})`);
         }
       } else {
-         console.warn(`Ignored invalid filter key: ${key}`);
+        console.warn(`Ignored invalid filter key: ${key}`);
       }
     }
+  } else if (params.filters && params.filters !== 'undefined' && params.filters !== 'null') {
+    console.warn('[meilisearch] filters payload ignored', params.filters);
   }
 
   const filterString = filterConditions.join(' AND ');
 
-  // 3. 执行搜索
+  let searchResult: any = null;
   try {
-    const searchResult = await index.search(q, {
+    searchResult = await index.search(q, {
       filter: filterString || undefined,
       sort: params.sort ? [params.sort] : undefined,
       hitsPerPage: pageSize,
-      page: page,
-      facets: ['*'], // Meilisearch v1.x / JS v0.40.0+ uses 'facets' to request distribution
+      page,
+      facets: ['*'],
     });
-
-    // 4. 返回结果
-    return {
-      hits: searchResult.hits as ProductDocument[],
-      page: searchResult.page || 1,
-      pageSize: searchResult.hitsPerPage,
-      total: searchResult.totalHits || 0,
-      totalPages: searchResult.totalPages || 0,
-      facets: searchResult.facetDistribution || {}, // Response is 'facetDistribution'
-    };
   } catch (error) {
     console.error('Meilisearch search failed:', error);
-    throw error;
+  }
+
+  const fallbackResult = await fallbackDirectusSearch(params, parsedFilters, page, pageSize);
+
+  if (!searchResult) {
+    return fallbackResult;
+  }
+
+  const meiliHits = (searchResult.hits as ProductDocument[]) || [];
+  if (meiliHits.length === 0) {
+    return fallbackResult.total > 0
+      ? fallbackResult
+      : {
+          hits: [],
+          page,
+          pageSize,
+          total: 0,
+          totalPages: 0,
+          facets: {},
+        };
+  }
+
+  const hydrationMap = await hydrateDocumentsByIds(meiliHits.map((hit) => hit.id));
+  const mergedHits = meiliHits.map((hit) => hydrationMap.get(hit.id) ?? hit);
+
+  const meiliTotal = searchResult.totalHits || mergedHits.length;
+  const fallbackTotal = fallbackResult.total;
+
+  if (fallbackTotal > meiliTotal) {
+    return fallbackResult;
+  }
+
+  return {
+    hits: mergedHits,
+    page: searchResult.page || page,
+    pageSize: searchResult.hitsPerPage || pageSize,
+    total: Math.max(meiliTotal, fallbackTotal),
+    totalPages: Math.max(searchResult.totalPages || 0, fallbackResult.totalPages || 0),
+    facets: fallbackResult.facets,
+  };
+}
+
+async function fallbackDirectusSearch(
+  params: SearchProductsParams,
+  parsedFilters: Record<string, string[]> | null,
+  page: number,
+  pageSize: number,
+): Promise<SearchProductsResult> {
+  const baseFilter: any = { status: { _eq: 'published' } };
+
+  if (params.q) {
+    baseFilter._or = [
+      { name: { _contains: params.q } },
+      { sku: { _contains: params.q } },
+      { description: { _contains: params.q } },
+    ];
+  }
+
+  if (params.category) {
+    baseFilter.category_id = { slug: { _eq: params.category } };
+  }
+
+  try {
+    const items = await directus.request(
+      readItems('products', {
+        filter: baseFilter,
+        limit: -1,
+        offset: 0,
+        sort: ['-date_created'],
+        fields: [
+          'id',
+          'sku',
+          'name',
+          'slug',
+          { category_id: ['name', 'slug'] },
+          'image_id',
+          { attribute_values: ['value_text', 'value_number', { attribute_id: ['key', 'type'] }] },
+        ] as any,
+      })
+    );
+
+    const products = items as unknown as DirectusProduct[];
+    const context = await buildTransformContext(products);
+    let docs = products.map((product) => transformProductToDocument(product, context));
+
+    if (parsedFilters) {
+      docs = docs.filter((doc) =>
+        Object.entries(parsedFilters).every(([key, values]) => {
+          const target = doc[key];
+          if (target === undefined || target === null) return false;
+          return values.some((candidate) => String(target).toLowerCase() === String(candidate).toLowerCase());
+        }),
+      );
+    }
+
+    const facetDistribution: Record<string, Record<string, number>> = {};
+    const accumulateFacet = (key: string, value: string | number | null) => {
+      if (value === null || value === undefined || value === '') return;
+      const bucket = facetDistribution[key] || (facetDistribution[key] = {});
+      const bucketKey = String(value);
+      bucket[bucketKey] = (bucket[bucketKey] || 0) + 1;
+    };
+    docs.forEach((doc) => {
+      accumulateFacet('category_slug', doc.category_slug);
+      Object.entries(doc).forEach(([key, value]) => {
+        if (key.startsWith('attr_')) {
+          accumulateFacet(key, value as string | number | null);
+        }
+      });
+    });
+
+    const total = docs.length;
+    const totalPages = Math.max(1, Math.ceil(total / pageSize));
+    const start = Math.max(0, (page - 1) * pageSize);
+    const paged = docs.slice(start, start + pageSize);
+
+    return {
+      hits: paged,
+      page,
+      pageSize,
+      total,
+      totalPages,
+      facets: facetDistribution,
+    };
+  } catch (error) {
+    console.error('[fallback] Directus search failed', error);
+    return {
+      hits: [],
+      page,
+      pageSize,
+      total: 0,
+      totalPages: 0,
+      facets: {},
+    };
+  }
+}
+
+function parseFiltersPayload(payload?: string): Record<string, string[]> | null {
+  if (!payload || payload === 'undefined' || payload === 'null') {
+    return null;
+  }
+  try {
+    const obj = JSON.parse(payload);
+    if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
+      return null;
+    }
+    return obj as Record<string, string[]>;
+  } catch (error) {
+    console.warn('[meilisearch] failed to parse filters payload', error);
+    return null;
+  }
+}
+
+async function hydrateDocumentsByIds(ids: string[]): Promise<Map<string, ProductDocument>> {
+  if (!ids.length) {
+    return new Map();
+  }
+
+  try {
+    const items = await directus.request(
+      readItems('products', {
+        filter: { id: { _in: ids } } as any,
+        fields: PRODUCT_FIELDS as any,
+        limit: ids.length,
+      }),
+    );
+
+    const products = items as unknown as DirectusProduct[];
+    if (!products.length) {
+      return new Map();
+    }
+
+    const context = await buildTransformContext(products);
+    const docs = products.map((product) => transformProductToDocument(product, context));
+    return new Map(docs.map((doc) => [doc.id, doc]));
+  } catch (error) {
+    console.error('[meilisearch] failed to hydrate documents from Directus', error);
+    return new Map();
   }
 }

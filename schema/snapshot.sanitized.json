@@ -4,423 +4,210 @@
   "vendor": "postgres",
   "collections": [
     {
-      "collection": "attributes",
-      "meta": {
-        "accountability": "all",
-        "archive_app_filter": true,
-        "archive_field": null,
-        "archive_value": null,
-        "collapse": "open",
-        "collection": "attributes",
-        "color": null,
-        "display_template": null,
-        "group": null,
-        "hidden": false,
-        "icon": "database",
-        "item_duplication_fields": null,
-        "note": null,
-        "preview_url": null,
-        "singleton": false,
-        "sort": null,
-        "sort_field": null,
-        "translations": null,
-        "unarchive_value": null,
-        "versioning": false
-      },
-      "schema": {
-        "name": "attributes"
-      }
-    },
-    {
       "collection": "categories",
-      "meta": {
-        "accountability": "all",
-        "archive_app_filter": true,
-        "archive_field": null,
-        "archive_value": null,
-        "collapse": "open",
-        "collection": "categories",
-        "color": null,
-        "display_template": null,
-        "group": null,
-        "hidden": false,
-        "icon": "database",
-        "item_duplication_fields": null,
-        "note": null,
-        "preview_url": null,
-        "singleton": false,
-        "sort": null,
-        "sort_field": null,
-        "translations": null,
-        "unarchive_value": null,
-        "versioning": false
-      },
       "schema": {
         "name": "categories"
-      }
-    },
-    {
-      "collection": "inquiries",
-      "meta": {
-        "accountability": "all",
-        "archive_app_filter": true,
-        "archive_field": null,
-        "archive_value": null,
-        "collapse": "open",
-        "collection": "inquiries",
-        "color": null,
-        "display_template": null,
-        "group": null,
-        "hidden": false,
-        "icon": "database",
-        "item_duplication_fields": null,
-        "note": null,
-        "preview_url": null,
-        "singleton": false,
-        "sort": null,
-        "sort_field": null,
-        "translations": null,
-        "unarchive_value": null,
-        "versioning": false
       },
-      "schema": {
-        "name": "inquiries"
-      }
-    },
-    {
-      "collection": "inquiry_items",
       "meta": {
-        "accountability": "all",
-        "archive_app_filter": true,
-        "archive_field": null,
-        "archive_value": null,
-        "collapse": "open",
-        "collection": "inquiry_items",
-        "color": null,
-        "display_template": null,
-        "group": null,
-        "hidden": false,
+        "collection": "categories",
         "icon": "database",
-        "item_duplication_fields": null,
         "note": null,
-        "preview_url": null,
-        "singleton": false,
-        "sort": null,
-        "sort_field": null,
-        "translations": null,
-        "unarchive_value": null,
-        "versioning": false
-      },
-      "schema": {
-        "name": "inquiry_items"
-      }
-    },
-    {
-      "collection": "product_attribute_values",
-      "meta": {
-        "accountability": "all",
-        "archive_app_filter": true,
-        "archive_field": null,
-        "archive_value": null,
-        "collapse": "open",
-        "collection": "product_attribute_values",
-        "color": null,
         "display_template": null,
-        "group": null,
         "hidden": false,
-        "icon": "database",
-        "item_duplication_fields": null,
-        "note": null,
-        "preview_url": null,
         "singleton": false,
-        "sort": null,
-        "sort_field": null,
         "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
         "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": null,
+        "sort": null,
+        "group": null,
+        "collapse": "open",
+        "preview_url": null,
         "versioning": false
-      },
-      "schema": {
-        "name": "product_attribute_values"
       }
     },
     {
       "collection": "products",
-      "meta": {
-        "accountability": "all",
-        "archive_app_filter": true,
-        "archive_field": null,
-        "archive_value": null,
-        "collapse": "open",
-        "collection": "products",
-        "color": null,
-        "display_template": null,
-        "group": null,
-        "hidden": false,
-        "icon": "database",
-        "item_duplication_fields": null,
-        "note": null,
-        "preview_url": null,
-        "singleton": false,
-        "sort": null,
-        "sort_field": null,
-        "translations": null,
-        "unarchive_value": null,
-        "versioning": false
-      },
       "schema": {
         "name": "products"
+      },
+      "meta": {
+        "collection": "products",
+        "icon": "database",
+        "note": null,
+        "display_template": null,
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": null,
+        "sort": null,
+        "group": null,
+        "collapse": "open",
+        "preview_url": null,
+        "versioning": false
+      }
+    },
+    {
+      "collection": "attributes",
+      "schema": {
+        "name": "attributes"
+      },
+      "meta": {
+        "collection": "attributes",
+        "icon": "database",
+        "note": null,
+        "display_template": null,
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": null,
+        "sort": null,
+        "group": null,
+        "collapse": "open",
+        "preview_url": null,
+        "versioning": false
+      }
+    },
+    {
+      "collection": "product_attribute_values",
+      "schema": {
+        "name": "product_attribute_values"
+      },
+      "meta": {
+        "collection": "product_attribute_values",
+        "icon": "database",
+        "note": null,
+        "display_template": null,
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": null,
+        "sort": null,
+        "group": null,
+        "collapse": "open",
+        "preview_url": null,
+        "versioning": false
+      }
+    },
+    {
+      "collection": "inquiries",
+      "schema": {
+        "name": "inquiries"
+      },
+      "meta": {
+        "collection": "inquiries",
+        "icon": "database",
+        "note": null,
+        "display_template": null,
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": null,
+        "sort": null,
+        "group": null,
+        "collapse": "open",
+        "preview_url": null,
+        "versioning": false
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "schema": {
+        "name": "inquiry_items"
+      },
+      "meta": {
+        "collection": "inquiry_items",
+        "icon": "database",
+        "note": null,
+        "display_template": null,
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": null,
+        "sort": null,
+        "group": null,
+        "collapse": "open",
+        "preview_url": null,
+        "versioning": false
       }
     }
   ],
   "fields": [
     {
-      "collection": "attributes",
+      "collection": "categories",
       "field": "id",
       "type": "uuid",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "data_type": "uuid",
+        "name": "id",
+        "table": "categories"
+      },
       "meta": {
-        "required": false,
         "special": [
           "uuid"
         ]
-      },
-      "schema": {
-        "name": "id",
-        "table": "attributes",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": true,
-        "is_primary_key": true,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "attributes",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "required": false,
-        "special": [
-          "date-created"
-        ]
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "attributes",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "attributes",
-      "field": "date_updated",
-      "type": "timestamp",
-      "meta": {
-        "required": false,
-        "special": [
-          "date-updated"
-        ]
-      },
-      "schema": {
-        "name": "date_updated",
-        "table": "attributes",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "attributes",
-      "field": "status",
-      "type": "string",
-      "meta": null,
-      "schema": {
-        "name": "status",
-        "table": "attributes",
-        "data_type": "character varying",
-        "default_value": "published",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "attributes",
-      "field": "name",
-      "type": "string",
-      "meta": null,
-      "schema": {
-        "name": "name",
-        "table": "attributes",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "attributes",
-      "field": "key",
-      "type": "string",
-      "meta": null,
-      "schema": {
-        "name": "key",
-        "table": "attributes",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": true,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "attributes",
-      "field": "type",
-      "type": "string",
-      "meta": null,
-      "schema": {
-        "name": "type",
-        "table": "attributes",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "attributes",
-      "field": "unit",
-      "type": "string",
-      "meta": null,
-      "schema": {
-        "name": "unit",
-        "table": "attributes",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "attributes",
-      "field": "is_facet",
-      "type": "boolean",
-      "meta": null,
-      "schema": {
-        "name": "is_facet",
-        "table": "attributes",
-        "data_type": "boolean",
-        "default_value": false,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
       }
     },
     {
       "collection": "categories",
-      "field": "id",
-      "type": "uuid",
-      "meta": {
-        "required": false,
-        "special": [
-          "uuid"
-        ]
-      },
+      "field": "status",
+      "type": "string",
       "schema": {
-        "name": "id",
-        "table": "categories",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": true,
-        "is_primary_key": true,
+        "default_value": "published",
+        "is_nullable": true,
         "is_generated": false,
-        "generation_expression": null,
+        "is_unique": false,
+        "is_primary_key": false,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "status",
+        "table": "categories"
       }
     },
     {
@@ -428,27 +215,19 @@
       "field": "date_created",
       "type": "timestamp",
       "meta": {
-        "required": false,
         "special": [
           "date-created"
         ]
       },
       "schema": {
-        "name": "date_created",
-        "table": "categories",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "timestamp without time zone",
+        "name": "date_created",
+        "table": "categories"
       }
     },
     {
@@ -456,658 +235,423 @@
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
-        "required": false,
         "special": [
           "date-updated"
         ]
       },
       "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
         "name": "date_updated",
-        "table": "categories",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "categories",
-      "field": "parent_id",
-      "type": "uuid",
-      "meta": {
-        "required": false,
-        "special": [
-          "m2o"
-        ]
-      },
-      "schema": {
-        "name": "parent_id",
-        "table": "categories",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "categories",
-      "field": "status",
-      "type": "string",
-      "meta": null,
-      "schema": {
-        "name": "status",
-        "table": "categories",
-        "data_type": "character varying",
-        "default_value": "published",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "table": "categories"
       }
     },
     {
       "collection": "categories",
       "field": "name",
       "type": "string",
-      "meta": null,
       "schema": {
-        "name": "name",
-        "table": "categories",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "name",
+        "table": "categories"
       }
     },
     {
       "collection": "categories",
       "field": "slug",
       "type": "string",
-      "meta": null,
       "schema": {
-        "name": "slug",
-        "table": "categories",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
         "is_unique": true,
-        "is_primary_key": false,
+        "is_nullable": true,
         "is_generated": false,
-        "generation_expression": null,
+        "is_primary_key": false,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "slug",
+        "table": "categories"
       }
     },
     {
       "collection": "categories",
       "field": "description",
       "type": "text",
-      "meta": null,
       "schema": {
-        "name": "description",
-        "table": "categories",
-        "data_type": "text",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "text",
+        "name": "description",
+        "table": "categories"
       }
     },
     {
-      "collection": "inquiries",
+      "collection": "categories",
+      "field": "parent_id",
+      "type": "uuid",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "uuid",
+        "name": "parent_id",
+        "table": "categories"
+      },
+      "meta": {
+        "special": [
+          "m2o"
+        ]
+      }
+    },
+    {
+      "collection": "products",
       "field": "id",
       "type": "uuid",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "data_type": "uuid",
+        "name": "id",
+        "table": "products"
+      },
       "meta": {
-        "required": false,
         "special": [
           "uuid"
         ]
-      },
-      "schema": {
-        "name": "id",
-        "table": "inquiries",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": true,
-        "is_primary_key": true,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
       }
     },
     {
-      "collection": "inquiries",
-      "field": "date_created",
-      "type": "timestamp",
-      "meta": {
-        "required": false,
-        "special": [
-          "date-created"
-        ]
-      },
-      "schema": {
-        "name": "date_created",
-        "table": "inquiries",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "inquiries",
-      "field": "date_updated",
-      "type": "timestamp",
-      "meta": {
-        "required": false,
-        "special": [
-          "date-updated"
-        ]
-      },
-      "schema": {
-        "name": "date_updated",
-        "table": "inquiries",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "inquiries",
-      "field": "customer_name",
-      "type": "string",
-      "meta": {
-        "required": true,
-        "special": null
-      },
-      "schema": {
-        "name": "customer_name",
-        "table": "inquiries",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "inquiries",
-      "field": "email",
-      "type": "string",
-      "meta": {
-        "required": true,
-        "special": null
-      },
-      "schema": {
-        "name": "email",
-        "table": "inquiries",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "inquiries",
+      "collection": "products",
       "field": "status",
       "type": "string",
-      "meta": null,
       "schema": {
+        "default_value": "published",
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
         "name": "status",
-        "table": "inquiries",
-        "data_type": "character varying",
-        "default_value": "new",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "table": "products"
       }
     },
     {
-      "collection": "inquiries",
-      "field": "company",
-      "type": "string",
-      "meta": null,
-      "schema": {
-        "name": "company",
-        "table": "inquiries",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "inquiries",
-      "field": "country",
-      "type": "string",
-      "meta": null,
-      "schema": {
-        "name": "country",
-        "table": "inquiries",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "inquiries",
-      "field": "message",
-      "type": "text",
-      "meta": null,
-      "schema": {
-        "name": "message",
-        "table": "inquiries",
-        "data_type": "text",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "inquiries",
-      "field": "ip_address",
-      "type": "string",
-      "meta": null,
-      "schema": {
-        "name": "ip_address",
-        "table": "inquiries",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "inquiries",
-      "field": "app_user_id",
-      "type": "string",
-      "meta": null,
-      "schema": {
-        "name": "app_user_id",
-        "table": "inquiries",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "inquiry_items",
-      "field": "id",
-      "type": "uuid",
-      "meta": {
-        "required": false,
-        "special": [
-          "uuid"
-        ]
-      },
-      "schema": {
-        "name": "id",
-        "table": "inquiry_items",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": true,
-        "is_primary_key": true,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "inquiry_items",
+      "collection": "products",
       "field": "date_created",
       "type": "timestamp",
       "meta": {
-        "required": false,
         "special": [
           "date-created"
         ]
       },
       "schema": {
-        "name": "date_created",
-        "table": "inquiry_items",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "timestamp without time zone",
+        "name": "date_created",
+        "table": "products"
       }
     },
     {
-      "collection": "inquiry_items",
+      "collection": "products",
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
-        "required": false,
         "special": [
           "date-updated"
         ]
       },
       "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
         "name": "date_updated",
-        "table": "inquiry_items",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "table": "products"
       }
     },
     {
-      "collection": "inquiry_items",
-      "field": "inquiry_id",
-      "type": "uuid",
-      "meta": {
-        "required": true,
-        "special": [
-          "m2o"
-        ]
-      },
-      "schema": {
-        "name": "inquiry_id",
-        "table": "inquiry_items",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "inquiry_items",
-      "field": "product_id",
-      "type": "uuid",
-      "meta": {
-        "required": false,
-        "special": [
-          "m2o"
-        ]
-      },
-      "schema": {
-        "name": "product_id",
-        "table": "inquiry_items",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "inquiry_items",
-      "field": "quantity",
-      "type": "integer",
-      "meta": null,
-      "schema": {
-        "name": "quantity",
-        "table": "inquiry_items",
-        "data_type": "integer",
-        "default_value": 1,
-        "max_length": null,
-        "numeric_precision": 32,
-        "numeric_scale": 0,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "inquiry_items",
-      "field": "target_price",
+      "collection": "products",
+      "field": "sku",
       "type": "string",
-      "meta": null,
       "schema": {
-        "name": "target_price",
-        "table": "inquiry_items",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
+        "is_unique": true,
         "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
         "is_generated": false,
-        "generation_expression": null,
+        "is_primary_key": false,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "sku",
+        "table": "products"
       }
     },
     {
-      "collection": "inquiry_items",
-      "field": "remark",
-      "type": "text",
-      "meta": null,
+      "collection": "products",
+      "field": "name",
+      "type": "string",
       "schema": {
-        "name": "remark",
-        "table": "inquiry_items",
-        "data_type": "text",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "name",
+        "table": "products"
+      }
+    },
+    {
+      "collection": "products",
+      "field": "slug",
+      "type": "string",
+      "schema": {
+        "is_unique": true,
+        "is_nullable": true,
+        "is_generated": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "slug",
+        "table": "products"
+      }
+    },
+    {
+      "collection": "products",
+      "field": "description",
+      "type": "text",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "text",
+        "name": "description",
+        "table": "products"
+      }
+    },
+    {
+      "collection": "products",
+      "field": "category_id",
+      "type": "uuid",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "uuid",
+        "name": "category_id",
+        "table": "products"
+      },
+      "meta": {
+        "special": [
+          "m2o"
+        ]
+      }
+    },
+    {
+      "collection": "attributes",
+      "field": "id",
+      "type": "uuid",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "data_type": "uuid",
+        "name": "id",
+        "table": "attributes"
+      },
+      "meta": {
+        "special": [
+          "uuid"
+        ]
+      }
+    },
+    {
+      "collection": "attributes",
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "default_value": "published",
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "status",
+        "table": "attributes"
+      }
+    },
+    {
+      "collection": "attributes",
+      "field": "date_created",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-created"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_created",
+        "table": "attributes"
+      }
+    },
+    {
+      "collection": "attributes",
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-updated"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_updated",
+        "table": "attributes"
+      }
+    },
+    {
+      "collection": "attributes",
+      "field": "name",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "name",
+        "table": "attributes"
+      }
+    },
+    {
+      "collection": "attributes",
+      "field": "key",
+      "type": "string",
+      "schema": {
+        "is_unique": true,
+        "is_nullable": true,
+        "is_generated": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "key",
+        "table": "attributes"
+      }
+    },
+    {
+      "collection": "attributes",
+      "field": "type",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "type",
+        "table": "attributes"
+      }
+    },
+    {
+      "collection": "attributes",
+      "field": "unit",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "unit",
+        "table": "attributes"
+      }
+    },
+    {
+      "collection": "attributes",
+      "field": "is_facet",
+      "type": "boolean",
+      "schema": {
+        "default_value": false,
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "boolean",
+        "name": "is_facet",
+        "table": "attributes"
       }
     },
     {
       "collection": "product_attribute_values",
       "field": "id",
       "type": "uuid",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "data_type": "uuid",
+        "name": "id",
+        "table": "product_attribute_values"
+      },
       "meta": {
-        "required": false,
         "special": [
           "uuid"
         ]
-      },
-      "schema": {
-        "name": "id",
-        "table": "product_attribute_values",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": true,
-        "is_primary_key": true,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
       }
     },
     {
@@ -1115,27 +659,19 @@
       "field": "date_created",
       "type": "timestamp",
       "meta": {
-        "required": false,
         "special": [
           "date-created"
         ]
       },
       "schema": {
-        "name": "date_created",
-        "table": "product_attribute_values",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "timestamp without time zone",
+        "name": "date_created",
+        "table": "product_attribute_values"
       }
     },
     {
@@ -1143,27 +679,19 @@
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
-        "required": false,
         "special": [
           "date-updated"
         ]
       },
       "schema": {
-        "name": "date_updated",
-        "table": "product_attribute_values",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "timestamp without time zone",
+        "name": "date_updated",
+        "table": "product_attribute_values"
       }
     },
     {
@@ -1171,27 +699,19 @@
       "field": "product_id",
       "type": "uuid",
       "meta": {
-        "required": false,
         "special": [
           "m2o"
         ]
       },
       "schema": {
-        "name": "product_id",
-        "table": "product_attribute_values",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "uuid",
+        "name": "product_id",
+        "table": "product_attribute_values"
       }
     },
     {
@@ -1199,436 +719,413 @@
       "field": "attribute_id",
       "type": "uuid",
       "meta": {
-        "required": false,
         "special": [
           "m2o"
         ]
       },
       "schema": {
-        "name": "attribute_id",
-        "table": "product_attribute_values",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "uuid",
+        "name": "attribute_id",
+        "table": "product_attribute_values"
       }
     },
     {
       "collection": "product_attribute_values",
       "field": "value_text",
       "type": "string",
-      "meta": null,
       "schema": {
-        "name": "value_text",
-        "table": "product_attribute_values",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "value_text",
+        "table": "product_attribute_values"
       }
     },
     {
       "collection": "product_attribute_values",
       "field": "value_number",
       "type": "float",
-      "meta": null,
       "schema": {
-        "name": "value_number",
-        "table": "product_attribute_values",
-        "data_type": "real",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": 24,
-        "numeric_scale": null,
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "real",
+        "numeric_precision": 24,
+        "name": "value_number",
+        "table": "product_attribute_values"
       }
     },
     {
-      "collection": "products",
+      "collection": "inquiries",
       "field": "id",
       "type": "uuid",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "data_type": "uuid",
+        "name": "id",
+        "table": "inquiries"
+      },
       "meta": {
-        "required": false,
         "special": [
           "uuid"
         ]
-      },
-      "schema": {
-        "name": "id",
-        "table": "products",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": false,
-        "is_unique": true,
-        "is_primary_key": true,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
       }
     },
     {
-      "collection": "products",
+      "collection": "inquiries",
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "default_value": "new",
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "status",
+        "table": "inquiries"
+      }
+    },
+    {
+      "collection": "inquiries",
+      "field": "app_user_id",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "app_user_id",
+        "table": "inquiries"
+      }
+    },
+    {
+      "collection": "inquiries",
       "field": "date_created",
       "type": "timestamp",
       "meta": {
-        "required": false,
         "special": [
           "date-created"
         ]
       },
       "schema": {
-        "name": "date_created",
-        "table": "products",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "timestamp without time zone",
+        "name": "date_created",
+        "table": "inquiries"
       }
     },
     {
-      "collection": "products",
+      "collection": "inquiries",
       "field": "date_updated",
       "type": "timestamp",
       "meta": {
-        "required": false,
         "special": [
           "date-updated"
         ]
       },
       "schema": {
-        "name": "date_updated",
-        "table": "products",
-        "data_type": "timestamp with time zone",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "timestamp without time zone",
+        "name": "date_updated",
+        "table": "inquiries"
       }
     },
     {
-      "collection": "products",
-      "field": "category_id",
+      "collection": "inquiries",
+      "field": "customer_name",
+      "type": "string",
+      "meta": {
+        "required": true
+      },
+      "schema": {
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "customer_name",
+        "table": "inquiries"
+      }
+    },
+    {
+      "collection": "inquiries",
+      "field": "email",
+      "type": "string",
+      "meta": {
+        "required": true
+      },
+      "schema": {
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "email",
+        "table": "inquiries"
+      }
+    },
+    {
+      "collection": "inquiries",
+      "field": "company",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "company",
+        "table": "inquiries"
+      }
+    },
+    {
+      "collection": "inquiries",
+      "field": "country",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "country",
+        "table": "inquiries"
+      }
+    },
+    {
+      "collection": "inquiries",
+      "field": "message",
+      "type": "text",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "text",
+        "name": "message",
+        "table": "inquiries"
+      }
+    },
+    {
+      "collection": "inquiries",
+      "field": "ip_address",
+      "type": "string",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "character varying",
+        "max_length": 255,
+        "name": "ip_address",
+        "table": "inquiries"
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "id",
+      "type": "uuid",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "data_type": "uuid",
+        "name": "id",
+        "table": "inquiry_items"
+      },
+      "meta": {
+        "special": [
+          "uuid"
+        ]
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "date_created",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-created"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_created",
+        "table": "inquiry_items"
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "special": [
+          "date-updated"
+        ]
+      },
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "timestamp without time zone",
+        "name": "date_updated",
+        "table": "inquiry_items"
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "inquiry_id",
       "type": "uuid",
       "meta": {
-        "required": false,
+        "special": [
+          "m2o"
+        ],
+        "required": true
+      },
+      "schema": {
+        "is_nullable": false,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "uuid",
+        "name": "inquiry_id",
+        "table": "inquiry_items"
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "product_id",
+      "type": "uuid",
+      "schema": {
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "data_type": "uuid",
+        "name": "product_id",
+        "table": "inquiry_items"
+      },
+      "meta": {
         "special": [
           "m2o"
         ]
-      },
-      "schema": {
-        "name": "category_id",
-        "table": "products",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
       }
     },
     {
-      "collection": "products",
-      "field": "image_id",
-      "type": "uuid",
-      "meta": {
-        "required": false,
-        "special": [
-          "file"
-        ]
-      },
-      "schema": {
-        "name": "image_id",
-        "table": "products",
-        "data_type": "uuid",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "products",
-      "field": "price_text",
-      "type": "string",
-      "meta": {
-        "required": false,
-        "special": null
-      },
-      "schema": {
-        "name": "price_text",
-        "table": "products",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "products",
-      "field": "moq",
+      "collection": "inquiry_items",
+      "field": "quantity",
       "type": "integer",
-      "meta": {
-        "required": false,
-        "special": null
-      },
       "schema": {
-        "name": "moq",
-        "table": "products",
+        "default_value": 1,
+        "is_nullable": true,
+        "is_generated": false,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
         "data_type": "integer",
-        "default_value": null,
-        "max_length": null,
         "numeric_precision": 32,
         "numeric_scale": 0,
+        "name": "quantity",
+        "table": "inquiry_items"
+      }
+    },
+    {
+      "collection": "inquiry_items",
+      "field": "target_price",
+      "type": "string",
+      "schema": {
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "products",
-      "field": "lead_time_days",
-      "type": "integer",
-      "meta": {
-        "required": false,
-        "special": null
-      },
-      "schema": {
-        "name": "lead_time_days",
-        "table": "products",
-        "data_type": "integer",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": 32,
-        "numeric_scale": 0,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "products",
-      "field": "material_summary",
-      "type": "string",
-      "meta": {
-        "required": false,
-        "special": null
-      },
-      "schema": {
-        "name": "material_summary",
-        "table": "products",
         "data_type": "character varying",
-        "default_value": null,
         "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "name": "target_price",
+        "table": "inquiry_items"
       }
     },
     {
-      "collection": "products",
-      "field": "status",
-      "type": "string",
-      "meta": null,
-      "schema": {
-        "name": "status",
-        "table": "products",
-        "data_type": "character varying",
-        "default_value": "published",
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "products",
-      "field": "sku",
-      "type": "string",
-      "meta": null,
-      "schema": {
-        "name": "sku",
-        "table": "products",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": true,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "products",
-      "field": "name",
-      "type": "string",
-      "meta": null,
-      "schema": {
-        "name": "name",
-        "table": "products",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": false,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "products",
-      "field": "slug",
-      "type": "string",
-      "meta": null,
-      "schema": {
-        "name": "slug",
-        "table": "products",
-        "data_type": "character varying",
-        "default_value": null,
-        "max_length": 255,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_nullable": true,
-        "is_unique": true,
-        "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
-        "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      }
-    },
-    {
-      "collection": "products",
-      "field": "description",
+      "collection": "inquiry_items",
+      "field": "remark",
       "type": "text",
-      "meta": null,
       "schema": {
-        "name": "description",
-        "table": "products",
-        "data_type": "text",
-        "default_value": null,
-        "max_length": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
         "is_nullable": true,
+        "is_generated": false,
         "is_unique": false,
         "is_primary_key": false,
-        "is_generated": false,
-        "generation_expression": null,
         "has_auto_increment": false,
-        "foreign_key_table": null,
-        "foreign_key_column": null
+        "data_type": "text",
+        "name": "remark",
+        "table": "inquiry_items"
       }
     }
   ],
   "relations": [
+    {
+      "collection": "directus_webhooks",
+      "field": "migrated_flow",
+      "related_collection": "directus_flows",
+      "schema": {
+        "table": "directus_webhooks",
+        "column": "migrated_flow",
+        "foreign_key_table": "directus_flows",
+        "foreign_key_column": "id",
+        "constraint_name": "directus_webhooks_migrated_flow_foreign",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      }
+    },
     {
       "collection": "products",
       "field": "category_id",

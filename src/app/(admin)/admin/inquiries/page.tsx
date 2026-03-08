@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { getInquiries } from '@/lib/inquiries';
+import type { Inquiry } from '@/lib/inquiries';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
@@ -24,97 +25,96 @@ export default async function InquiriesPage({ searchParams }: Props) {
   const statuses = ['all', 'new', 'processing', 'closed', 'archived'];
 
   return (
-    <div className="p-8 max-w-7xl mx-auto">
-      <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-6">
-        <div>
-          <p className="text-sm font-semibold text-blue-600 uppercase tracking-wide">Admin Console</p>
-          <h1 className="text-3xl font-bold text-gray-900 mt-2">Inquiries Management</h1>
-          <p className="text-sm text-gray-500 mt-2">Review and update RFQ pipeline status.</p>
+    <div className="mx-auto max-w-7xl px-4 py-10 text-white">
+      <div className="rounded-[32px] border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.5em] text-blue-200">Admin Console</p>
+            <h1 className="mt-3 text-3xl font-semibold text-white">Inquiries Management</h1>
+            <p className="text-sm text-white/70">Review and update RFQ pipeline status.</p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {statuses.map((status) => (
+              <Link
+                key={status}
+                href={`/admin/inquiries?status=${status}`}
+                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wide transition ${
+                  currentStatus === status
+                    ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30'
+                    : 'bg-white/10 text-white/70 hover:bg-white/20'
+                }`}
+              >
+                {status.charAt(0).toUpperCase() + status.slice(1)}
+              </Link>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {statuses.map((status) => (
-            <Link
-              key={status}
-              href={`/admin/inquiries?status=${status}`}
-              className={`px-4 py-2 rounded-full text-xs font-semibold transition-colors ${
-                currentStatus === status
-                  ? 'bg-blue-600 text-white shadow-sm'
-                  : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
-              }`}
-            >
-              {status.charAt(0).toUpperCase() + status.slice(1)}
-            </Link>
-          ))}
-        </div>
-      </div>
-      
-      <div className="overflow-x-auto border border-gray-200 rounded-2xl shadow-sm bg-white">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Country</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {inquiries.length > 0 ? (
-              inquiries.map((inquiry: any) => (
-                <tr key={inquiry.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {new Date(inquiry.date_created).toLocaleDateString()}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    <div>{inquiry.customer_name}</div>
-                    <div className="text-gray-400 font-normal">{inquiry.email}</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {inquiry.app_user_id ? (
-                      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">
-                        Registered
+
+        <div className="mt-8 overflow-x-auto md:overflow-visible scrollbar-hidden rounded-[28px] border border-white/10 bg-[#050915]/80 shadow-xl">
+          <table className="min-w-[1100px] md:min-w-0 w-full divide-y divide-white/5 text-sm">
+            <thead className="bg-white/5 text-xs uppercase tracking-[0.3em] text-white/60">
+              <tr>
+                {['Date', 'Customer', 'Account', 'Company', 'Country', 'Status', 'Action'].map((header) => (
+                  <th key={header} className="px-6 py-3 text-left">
+                    {header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/5">
+              {inquiries.length > 0 ? (
+                inquiries.map((inquiry: Inquiry) => (
+                  <tr key={inquiry.id} className="hover:bg-white/5 transition-colors">
+                    <td className="px-6 py-4 whitespace-nowrap text-white/70">
+                      {new Date(inquiry.date_created).toLocaleDateString()}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-white">
+                      <div className="font-semibold">{inquiry.customer_name}</div>
+                      <div className="text-xs text-white/60">{inquiry.email}</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {inquiry.app_user_id ? (
+                        <span className="inline-flex rounded-full bg-purple-500/20 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-purple-200">
+                          Registered
+                        </span>
+                      ) : (
+                        <span className="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white/70">
+                          Guest
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-white/80">{inquiry.company || '-'}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-white/80">{inquiry.country || '-'}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span
+                        className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide ${
+                          inquiry.status === 'new'
+                            ? 'bg-emerald-400/20 text-emerald-200'
+                            : inquiry.status === 'processing'
+                            ? 'bg-blue-400/20 text-blue-200'
+                            : inquiry.status === 'closed'
+                            ? 'bg-white/10 text-white/70'
+                            : 'bg-amber-400/20 text-amber-200'
+                        }`}
+                      >
+                        {inquiry.status?.toUpperCase() || 'NEW'}
                       </span>
-                    ) : (
-                      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                        Guest
-                      </span>
-                    )}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {inquiry.company || '-'}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {inquiry.country || '-'}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                      ${inquiry.status === 'new' ? 'bg-green-100 text-green-800' : 
-                        inquiry.status === 'processing' ? 'bg-blue-100 text-blue-800' : 
-                        inquiry.status === 'closed' ? 'bg-gray-100 text-gray-800' :
-                        'bg-yellow-100 text-yellow-800'}`}>
-                      {inquiry.status?.toUpperCase() || 'NEW'}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
-                    {inquiry.message || '-'}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-600 hover:text-blue-900">
-                    <Link href={`/admin/inquiries/${inquiry.id}`}>View</Link>
+                    </td>
+                    <td className="min-w-[90px] px-6 py-4 text-right text-blue-200 hover:text-white whitespace-nowrap">
+                      <Link href={`/admin/inquiries/${inquiry.id}`}>View</Link>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={8} className="px-6 py-12 text-center text-white/60">
+                    No inquiries found.
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={7} className="px-6 py-12 text-center text-gray-500">
-                  No inquiries found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

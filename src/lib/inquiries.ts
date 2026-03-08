@@ -22,7 +22,7 @@ export interface InquiryItem {
 }
 
 export async function getInquiries(limit = 50, status?: string, userId?: string) {
-  const filter: any = {};
+  const filter: Record<string, any> = {};
   if (status && status !== 'all') {
     filter.status = { _eq: status };
   }
@@ -35,51 +35,31 @@ export async function getInquiries(limit = 50, status?: string, userId?: string)
       sort: ['-date_created'],
       limit,
       filter,
-      fields: [
-        'id',
-        'date_created',
-        'customer_name',
-        'email',
-        'company',
-        'country',
-        'status',
-        'message',
-        'app_user_id',
-      ] as any,
-    })
+      fields: ['id', 'date_created', 'customer_name', 'email', 'company', 'country', 'status', 'message', 'app_user_id'],
+    }),
   );
 }
 
 export async function getInquiry(id: string): Promise<Inquiry | null> {
-  // Get the inquiry details
   const inquiry = await directus.request(
     readItem('inquiries', id, {
-      fields: [
-        '*',
-      ] as any,
-    })
+      fields: ['*'],
+    }),
   );
 
   if (!inquiry) return null;
 
-  // Manually fetch related items since Directus relationship isn't configured
   try {
     const items = await directus.request(
       readItems('inquiry_items', {
-        filter: { inquiry_id: { _eq: id } } as any,
+        filter: { inquiry_id: { _eq: id } },
         fields: ['*'],
-      })
+      }),
     );
-    return {
-      ...inquiry,
-      items,
-    } as unknown as Inquiry;
-  } catch (e) {
-    console.error('Failed to fetch inquiry items:', e);
-    return {
-      ...inquiry,
-      items: [],
-    } as unknown as Inquiry;
+    return { ...inquiry, items } as Inquiry;
+  } catch (error) {
+    console.error('Failed to fetch inquiry items:', error);
+    return { ...inquiry, items: [] } as Inquiry;
   }
 }
 
@@ -87,6 +67,6 @@ export async function updateInquiryStatus(id: string, status: string) {
   return directus.request(
     updateItem('inquiries', id, {
       status,
-    })
+    }),
   );
 }

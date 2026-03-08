@@ -4,6 +4,10 @@ import { createDirectus, staticToken, rest } from '@directus/sdk';
 const DIRECTUS_URL = process.env.DIRECTUS_URL || 'http://localhost:8055';
 const DIRECTUS_TOKEN = process.env.DIRECTUS_ADMIN_TOKEN || '';
 
+if (!DIRECTUS_TOKEN) {
+  console.warn('[directus] DIRECTUS_ADMIN_TOKEN is empty – Directus requests will fail.');
+}
+
 // 定义 Directus Schema 类型（部分核心字段）
 interface Schema {
   products: Product[];
@@ -74,8 +78,10 @@ interface Inquiry {
   company?: string;
   country?: string;
   message?: string;
+  status: 'new' | 'processing' | 'closed' | 'archived';
+  app_user_id?: string;
   items?: InquiryItem[];
-  date_created?: string;
+  date_created: string;
 }
 
 interface InquiryItem {

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
+import { useState } from 'react';
 
 interface RFQFormProps {
   product: {
@@ -20,7 +20,7 @@ export default function RFQForm({ product }: RFQFormProps) {
     e.preventDefault();
     setLoading(true);
     setError('');
-    
+
     const formData = new FormData(e.currentTarget);
     const data = {
       customer_name: formData.get('customer_name'),
@@ -28,14 +28,14 @@ export default function RFQForm({ product }: RFQFormProps) {
       company: formData.get('company'),
       country: formData.get('country'),
       message: formData.get('message'),
-      website: formData.get('website'), // Include honeypot field
+      website: formData.get('website'),
       items: [
         {
           product_id: product.id,
           quantity: Number(formData.get('quantity')),
           remark: formData.get('remark'),
-        }
-      ]
+        },
+      ],
     };
 
     try {
@@ -48,10 +48,11 @@ export default function RFQForm({ product }: RFQFormProps) {
       const result = await res.json();
       if (res.ok) {
         setSuccessId(result.inquiry_id);
+        (e.currentTarget as HTMLFormElement).reset();
       } else {
         setError(result.message || 'Failed to submit inquiry');
       }
-    } catch (err) {
+    } catch {
       setError('Network error');
     } finally {
       setLoading(false);
@@ -60,26 +61,30 @@ export default function RFQForm({ product }: RFQFormProps) {
 
   if (successId) {
     return (
-      <div id="rfq" className="bg-green-50 border border-green-200 rounded-lg p-8 text-center shadow-sm">
-        <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
-          <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-          </svg>
+      <div className="rounded-[32px] border-2 border-blue-500/30 bg-[rgba(2,6,23,0.55)] p-8 text-white shadow-[0_25px_60px_rgba(2,6,23,0.65)]">
+        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-blue-400/40 bg-blue-500/30">
+          <span className="text-2xl text-blue-200 animate-pulse">✓</span>
         </div>
-        <h3 className="text-xl font-bold text-green-800 mb-2">Inquiry Submitted!</h3>
-        <p className="text-green-700 mb-6">Your reference ID is <span className="font-mono font-bold">{successId}</span>. We will contact you shortly.</p>
-        <div className="flex justify-center gap-4">
-          <button 
+        <h3 className="text-center text-2xl font-semibold">Inquiry submitted</h3>
+        <p className="mt-3 text-center text-sm text-blue-100">
+          Reference ID · <span className="font-mono text-white">{successId}</span>
+        </p>
+        <p className="mt-1 text-center text-xs text-[color:var(--color-text-muted)]">
+          We will send pricing and lead-time proposals within 24 hours.
+        </p>
+        <div className="mt-6 flex justify-center gap-4">
+          <button
+            type="button"
             onClick={() => setSuccessId(null)}
-            className="px-4 py-2 border border-green-600 text-green-600 rounded-md hover:bg-green-50 transition-colors text-sm font-medium"
+            className="rounded-full border border-white/20 px-5 py-2 text-xs uppercase tracking-[0.3em] text-white hover:border-blue-400"
           >
-            Submit Another
+            Start another inquiry
           </button>
-          <Link 
+          <Link
             href="/"
-            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm font-medium shadow-sm"
+            className="rounded-full border border-white/20 px-5 py-2 text-xs uppercase tracking-[0.3em] text-white hover:border-blue-400"
           >
-            Back to Home
+            Back to homepage
           </Link>
         </div>
       </div>
@@ -87,86 +92,104 @@ export default function RFQForm({ product }: RFQFormProps) {
   }
 
   return (
-    <div id="rfq" className="bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
-      <div className="bg-blue-600 px-6 py-4">
-        <h3 className="text-xl font-bold text-white flex items-center gap-2">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-          Request a Quote
-        </h3>
-        <p className="text-blue-100 text-sm mt-1">Get pricing and lead time for {product.name}</p>
+    <div className="rounded-[32px] border-2 border-blue-500/20 bg-[rgba(2,6,23,0.65)] text-white shadow-[0_25px_60px_rgba(2,6,23,0.65)]">
+      <div className="border-b border-blue-500/20 px-6 py-4">
+        <p className="text-xs uppercase tracking-[0.5em] text-blue-200">RFQ Module</p>
+        <h3 className="mt-2 text-2xl font-semibold">Request a Quote</h3>
+        <p className="text-sm text-white/70">
+          {product.name} · SKU {product.sku}
+        </p>
       </div>
-      
+
       <div className="p-6">
         {error && (
-          <div className="mb-6 p-4 bg-red-50 text-red-700 text-sm rounded-md border border-red-200 flex items-start">
-            <svg className="h-5 w-5 text-red-400 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd"/></svg>
+          <div className="mb-6 rounded-2xl border border-red-500/40 bg-red-500/20 px-4 py-3 text-sm text-red-100">
             {error}
           </div>
         )}
-        
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Honeypot Field (Hidden) */}
-          <input 
-            type="text" 
-            name="website" 
-            style={{ display: 'none' }} 
-            tabIndex={-1} 
-            autoComplete="off" 
-          />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
-              <input type="text" name="customer_name" required className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border" placeholder="John Doe" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
-              <input type="email" name="email" required className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border" placeholder="john@company.com" />
-            </div>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" />
+
+          <div className="grid gap-5 md:grid-cols-2">
+            <Field label="Full Name *">
+              <input
+                required
+                name="customer_name"
+                placeholder="Liang Chen"
+                className="rfq-input"
+              />
+            </Field>
+            <Field label="Email *">
+              <input required name="email" type="email" placeholder="procurement@company.com" className="rfq-input" />
+            </Field>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
-              <input type="text" name="company" className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border" placeholder="Acme Industries" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Country</label>
-              <input type="text" name="country" className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border" placeholder="USA" />
-            </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            <Field label="Company">
+              <input name="company" placeholder="ACME Industrial" className="rfq-input" />
+            </Field>
+            <Field label="Country">
+              <input name="country" placeholder="DE / US / VN ..." className="rfq-input" />
+            </Field>
           </div>
 
-          <div>
-             <label className="block text-sm font-medium text-gray-700 mb-1">Quantity Required *</label>
-             <input type="number" name="quantity" required min="1" className="w-full md:w-1/3 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border" placeholder="1000" />
-          </div>
+          <Field label="Quantity *">
+            <input
+              required
+              name="quantity"
+              type="number"
+              min={1}
+              placeholder="10000 sets"
+              className="rfq-input"
+            />
+          </Field>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Additional Requirements</label>
-            <textarea name="message" rows={4} className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border" placeholder="Please specify material certification requirements, delivery terms, etc."></textarea>
-          </div>
+          <Field label="Application / Notes">
+            <textarea
+              name="message"
+              rows={4}
+              placeholder="Specify coating, packing, inspection or delivery terms..."
+              className="rfq-input resize-none"
+            />
+          </Field>
 
-          <div className="pt-2">
+          <div className="pt-3">
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-70 disabled:cursor-not-allowed transition-all"
+              className="btn-industrial relative flex w-full items-center justify-center rounded-full border border-blue-500/50 bg-blue-500/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-white transition hover:border-blue-300"
             >
               {loading ? (
-                <span className="flex items-center">
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                  Processing...
+                <span className="flex items-center gap-2 text-xs">
+                  <span className="h-1 w-20 animate-pulse bg-white/60" />
+                  Uploading Specs...
                 </span>
               ) : (
-                'Submit Request for Quote'
+                'Submit RFQ Packet'
               )}
             </button>
-            <p className="mt-4 text-center text-xs text-gray-500">
-              We typically respond within 24 hours. Your information is secure.
+            <p className="mt-3 text-center text-xs text-white/60">
+              Submitting generates a reference ID and auto-notifies our resident quality engineers.
             </p>
           </div>
         </form>
       </div>
     </div>
+  );
+}
+
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <label className="flex flex-col gap-2 text-xs uppercase tracking-[0.3em] text-white/60">
+      {label}
+      {children}
+    </label>
   );
 }

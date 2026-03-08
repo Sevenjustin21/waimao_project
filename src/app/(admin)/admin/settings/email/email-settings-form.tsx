@@ -142,7 +142,7 @@ export default function EmailSettingsForm({ initialSettings, envHints }: Props) 
               name="smtpHost"
               value={formData.smtpHost}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-gray-900 placeholder:text-gray-400 focus:border-blue-600 focus:ring-blue-600"
               placeholder="smtp.example.com"
               required={!envHints.smtpHost}
             />
@@ -154,7 +154,7 @@ export default function EmailSettingsForm({ initialSettings, envHints }: Props) 
               name="smtpPort"
               value={formData.smtpPort}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-gray-900 placeholder:text-gray-400 focus:border-blue-600 focus:ring-blue-600"
               placeholder="587"
               min={1}
               max={65535}
@@ -171,7 +171,7 @@ export default function EmailSettingsForm({ initialSettings, envHints }: Props) 
               name="smtpUser"
               value={formData.smtpUser}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-gray-900 placeholder:text-gray-400 focus:border-blue-600 focus:ring-blue-600"
               placeholder="no-reply@example.com"
               required={!envHints.smtpUser}
             />
@@ -188,7 +188,7 @@ export default function EmailSettingsForm({ initialSettings, envHints }: Props) 
               name="smtpPass"
               value={formData.smtpPass}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-gray-900 placeholder:text-gray-400 focus:border-blue-600 focus:ring-blue-600"
               placeholder={hasPassword && !clearPassword ? '••••••••' : '输入新密码'}
             />
             {hasPassword && !clearPassword && (
@@ -237,7 +237,7 @@ export default function EmailSettingsForm({ initialSettings, envHints }: Props) 
               name="fromName"
               value={formData.fromName}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-gray-900 placeholder:text-gray-400 focus:border-blue-600 focus:ring-blue-600"
               placeholder="WAIMO System"
             />
           </div>
@@ -248,7 +248,7 @@ export default function EmailSettingsForm({ initialSettings, envHints }: Props) 
               name="fromEmail"
               value={formData.fromEmail}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-gray-900 placeholder:text-gray-400 focus:border-blue-600 focus:ring-blue-600"
               placeholder="rfq@example.com"
               required={!envHints.smtpFromEmail}
             />
@@ -263,7 +263,7 @@ export default function EmailSettingsForm({ initialSettings, envHints }: Props) 
               value={formData.notifyTo}
               onChange={handleChange}
               rows={2}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-gray-900 placeholder:text-gray-400 focus:border-blue-600 focus:ring-blue-600"
               placeholder="ops@example.com,sales@example.com"
               required={!envHints.notifyTo}
             />
@@ -275,7 +275,7 @@ export default function EmailSettingsForm({ initialSettings, envHints }: Props) 
               name="replyTo"
               value={formData.replyTo}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-gray-900 placeholder:text-gray-400 focus:border-blue-600 focus:ring-blue-600"
               placeholder="sales@example.com"
             />
           </div>
@@ -314,7 +314,7 @@ export default function EmailSettingsForm({ initialSettings, envHints }: Props) 
               value={testRecipient}
               onChange={(e) => setTestRecipient(e.target.value)}
               placeholder="测试收件人（可选）"
-              className="rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600 text-sm"
+              className="rounded-md border-gray-300 shadow-sm text-gray-900 placeholder:text-gray-400 focus:border-blue-600 focus:ring-blue-600 text-sm"
             />
             <button
               type="button"

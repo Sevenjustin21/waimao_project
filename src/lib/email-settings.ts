@@ -40,6 +40,23 @@ export interface ResolvedEmailConfig {
   replyTo?: string;
 }
 
+function normalizeSmtpHost(host?: string | null) {
+  return (host || '').trim().toLowerCase();
+}
+
+function isLocalSmtpHost(host?: string | null) {
+  const normalizedHost = normalizeSmtpHost(host);
+  return normalizedHost === 'localhost' || normalizedHost === '127.0.0.1';
+}
+
+function isLocalMailOverrideEnabled() {
+  return process.env.SMTP_FORCE_ENV === 'true';
+}
+
+export function shouldUseSmtpAuth(config: Pick<ResolvedEmailConfig, 'host'>) {
+  return !isLocalSmtpHost(config.host);
+}
+
 function handleLookupError(error: unknown) {
   if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2021') {
     console.warn('[EmailSettings] 表缺失，请运行 `npx prisma db push` 同步最新结构');
@@ -130,15 +147,48 @@ export async function getResolvedEmailConfig(): Promise<ResolvedEmailConfig | nu
 
 export function resolveEmailConfig(record?: Awaited<ReturnType<typeof getEmailSettingsRecord>>): ResolvedEmailConfig | null {
   const envPort = parseInt(process.env.SMTP_PORT || '', 10);
-  const host = record?.smtpHost || process.env.SMTP_HOST || '';
-  const port = record?.smtpPort || (Number.isFinite(envPort) ? envPort : 587);
-  const user = record?.smtpUser || process.env.SMTP_USER || '';
-  const pass = record?.smtpPass || process.env.SMTP_PASS || '';
-  const fromName = record?.fromName || process.env.SMTP_FROM_NAME || 'Waimao System';
-  const fromEmail = record?.fromEmail || process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER || '';
-  const notifyTo = record?.notifyTo || process.env.NOTIFY_EMAIL_TO || '';
-  const replyTo = record?.replyTo || process.env.SMTP_REPLY_TO || undefined;
-  const secure = typeof record?.smtpSecure === 'boolean' ? record!.smtpSecure : port === 465;
+  const envSecureOverride = process.env.SMTP_SECURE;
+  const preferEnv = isLocalMailOverrideEnabled();
+
+  const envHost = process.env.SMTP_HOST || '';
+  const envUser = process.env.SMTP_USER || '';
+  const envPass = process.env.SMTP_PASS || '';
+  const envFromName = process.env.SMTP_FROM_NAME || 'Waimao System';
+  const envFromEmail = process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER || '';
+  const envNotifyTo = process.env.NOTIFY_EMAIL_TO || '';
+  const envReplyTo = process.env.SMTP_REPLY_TO || undefined;
+
+  const host = preferEnv ? envHost || record?.smtpHost || '' : record?.smtpHost || envHost || '';
+  const port = preferEnv
+    ? (Number.isFinite(envPort) ? envPort : record?.smtpPort || 587)
+    : record?.smtpPort || (Number.isFinite(envPort) ? envPort : 587);
+  const user = preferEnv ? envUser || record?.smtpUser || '' : record?.smtpUser || envUser || '';
+  const pass = preferEnv ? envPass || record?.smtpPass || '' : record?.smtpPass || envPass || '';
+  const fromName = preferEnv
+    ? envFromName || record?.fromName || 'Waimao System'
+    : record?.fromName || envFromName || 'Waimao System';
+  const fromEmail = preferEnv
+    ? envFromEmail || record?.fromEmail || envUser || ''
+    : record?.fromEmail || envFromEmail || envUser || '';
+  const notifyTo = preferEnv
+    ? envNotifyTo || record?.notifyTo || ''
+    : record?.notifyTo || envNotifyTo || '';
+  const replyTo = preferEnv
+    ? envReplyTo || record?.replyTo || undefined
+    : record?.replyTo || envReplyTo || undefined;
+  const secure = preferEnv
+    ? envSecureOverride === 'true'
+      ? true
+      : envSecureOverride === 'false'
+        ? false
+        : port === 465
+    : typeof record?.smtpSecure === 'boolean'
+      ? record.smtpSecure
+      : envSecureOverride === 'true'
+        ? true
+        : envSecureOverride === 'false'
+          ? false
+          : port === 465;
 
   if (!host || !user || !pass || !fromEmail || !notifyTo) {
     return null;
