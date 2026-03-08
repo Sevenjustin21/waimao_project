@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 interface RFQFormProps {
   product: {
@@ -15,6 +15,7 @@ export default function RFQForm({ product }: RFQFormProps) {
   const [loading, setLoading] = useState(false);
   const [successId, setSuccessId] = useState<string | null>(null);
   const [error, setError] = useState('');
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,8 +48,9 @@ export default function RFQForm({ product }: RFQFormProps) {
 
       const result = await res.json();
       if (res.ok) {
+        setError('');
+        formRef.current?.reset();
         setSuccessId(result.inquiry_id);
-        (e.currentTarget as HTMLFormElement).reset();
       } else {
         setError(result.message || 'Failed to submit inquiry');
       }
@@ -75,7 +77,11 @@ export default function RFQForm({ product }: RFQFormProps) {
         <div className="mt-6 flex justify-center gap-4">
           <button
             type="button"
-            onClick={() => setSuccessId(null)}
+            onClick={() => {
+              setError('');
+              setLoading(false);
+              setSuccessId(null);
+            }}
             className="rounded-full border border-white/20 px-5 py-2 text-xs uppercase tracking-[0.3em] text-white hover:border-blue-400"
           >
             Start another inquiry
@@ -108,7 +114,7 @@ export default function RFQForm({ product }: RFQFormProps) {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
           <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" />
 
           <div className="grid gap-5 md:grid-cols-2">
