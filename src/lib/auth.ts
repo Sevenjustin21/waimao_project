@@ -140,17 +140,7 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  cookies: {
-    sessionToken: {
-      name: `next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: preferSecureCookies,
-      },
-    },
-  },
+  useSecureCookies: preferSecureCookies,
   callbacks: {
     async session({ session, token }) {
       if (token) {
