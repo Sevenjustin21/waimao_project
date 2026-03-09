@@ -508,10 +508,19 @@ export async function searchProducts(params: SearchProductsParams): Promise<Sear
   }
 
   const hydrationMap = await hydrateDocumentsByIds(meiliHits.map((hit) => hit.id));
-  const mergedHits = meiliHits.map((hit) => hydrationMap.get(hit.id) ?? hit);
+  const mergedHits = meiliHits
+    .map((hit) => hydrationMap.get(hit.id))
+    .filter((hit): hit is ProductDocument => Boolean(hit));
 
   const meiliTotal = searchResult.totalHits || mergedHits.length;
   const fallbackTotal = fallbackResult.total;
+
+  const hasIndexDrift = mergedHits.length !== meiliHits.length || fallbackTotal > meiliTotal;
+
+  if (hasIndexDrift) {
+    console.warn('[meilisearch] detected stale or missing index entries, falling back to Directus results');
+    return fallbackResult;
+  }
 
   if (fallbackTotal > meiliTotal) {
     return fallbackResult;
@@ -646,7 +655,10 @@ async function hydrateDocumentsByIds(ids: string[]): Promise<Map<string, Product
   try {
     const items = await directus.request(
       readItems('products', {
-        filter: { id: { _in: ids } } as any,
+        filter: {
+          id: { _in: ids },
+          status: { _eq: 'published' },
+        } as any,
         fields: PRODUCT_FIELDS as any,
         limit: ids.length,
       }),
